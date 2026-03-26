@@ -1,12 +1,14 @@
 # Dependencies
 node_modules/
+jspm_packages/
 
 # Build output
 dist/
 out/
 build/
+release/
 
-# Electron-specific
+# Electron build
 *.exe
 *.msi
 *.dmg
@@ -14,12 +16,28 @@ build/
 *.snap
 *.deb
 *.rpm
+*.blockmap
+electron-builder.env
 
 # Logs
+logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage
+*.lcov
+.nyc_output
+lib-cov
 
 # OS files
 .DS_Store
@@ -31,28 +49,55 @@ Desktop.ini
 .vscode/
 *.swp
 *.swo
+.vscode-test
 
 # Environment
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
-# Temporary files
+# Temporary/Cache
 *.tmp
 *.temp
 .cache/
+.parcel-cache
+.eslintcache
+.stylelintcache
 
-# Package lock (optional - remove if you want to track it)
-# package-lock.json
+# TypeScript
+*.tsbuildinfo
 
-# Screenshots/test files
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.bmp
-!src/assets/**
-!src/bg/**
+# npm
+.npm
+*.tgz
 
-# Installer output
-installer/
+# Yarn
+.yarn-integrity
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Framework outputs
+.next
+.nuxt
+.docusaurus
+.svelte-kit/
+.vuepress/dist
+**/.vitepress/dist
+**/.vitepress/cache
+
+# Other
+.grunt
+bower_components
+.lock-wscript
+.serverless/
+.fusebox/
+.dynamodb/
+.firebase/
+.tern-port
+.node_repl_history
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
