@@ -101,5 +101,4 @@ DeadBYTE/
 MIT License
 
 ## Author
-
-DeadBYTE Team
+M. O. N. E. R
