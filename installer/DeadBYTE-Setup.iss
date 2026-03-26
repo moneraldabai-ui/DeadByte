@@ -6,7 +6,7 @@
 ; ============================================
 
 #define MyAppName "DeadBYTE"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.2"
 #define MyAppPublisher "M. O. N. E. R"
 #define MyAppURL "https://github.com/moneraldabai-ui/DeadByte"
 #define MyAppExeName "DeadBYTE.exe"
