@@ -610,7 +610,8 @@ ipcMain.handle('updates:download', async (event, url, fileName) => {
       const request = protocol.get(downloadUrl, {
         headers: {
           'User-Agent': 'DeadBYTE-App'
-        }
+        },
+        timeout: 600000 // 10 minutes timeout for large files
       }, (response) => {
         // Handle redirects (GitHub uses these for asset downloads)
         if (response.statusCode === 301 || response.statusCode === 302) {
@@ -680,6 +681,9 @@ ipcMain.handle('updates:download', async (event, url, fileName) => {
         activeDownload = null;
         resolve({ success: false, error: 'TIMEOUT', message: 'Download timed out' });
       });
+
+      // Set socket timeout to 10 minutes (for slow connections)
+      request.setTimeout(600000);
     };
 
     downloadFile(url);
