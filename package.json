@@ -1,0 +1,30 @@
+{
+  "name": "deadbyte",
+  "version": "1.0.0",
+  "description": "DeadBYTE - Advanced File Management and System Control",
+  "main": "electron.js",
+  "scripts": {
+    "start": "node node_modules/electron/cli.js .",
+    "dev": "node node_modules/electron/cli.js . --enable-logging"
+  },
+  "author": "DeadBYTE Team",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^28.0.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.deadbyte.app",
+    "productName": "DeadBYTE",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/skull/skull.ico",
+      "requestedExecutionLevel": "requireAdministrator"
+    }
+  }
+}

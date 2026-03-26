@@ -1,0 +1,391 @@
+/**
+ * DeadBYTE Design System - CSS Variables
+ * =======================================
+ * Core design tokens for the entire application.
+ * All values are customizable from this single source.
+ */
+
+:root {
+  /* ============================================
+     COLOR SYSTEM
+     ============================================ */
+
+  /* Primary Colors - Skull & Core Identity */
+  --color-white: #FFFFFF;
+  --color-white-90: rgba(255, 255, 255, 0.9);
+  --color-white-80: rgba(255, 255, 255, 0.8);
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --color-white-40: rgba(255, 255, 255, 0.4);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-white-05: rgba(255, 255, 255, 0.05);
+
+  /* Background Colors - Dark Foundation */
+  --color-bg-pure: #000000;
+  --color-bg-primary: #0A0A0A;
+  --color-bg-secondary: #0D0D0D;
+  --color-bg-elevated: #121212;
+  --color-bg-surface: #1A1A1A;
+  --color-bg-hover: #252525;
+  --color-bg-active: #333333;
+
+  /* Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B0B0B0;
+  --color-text-tertiary: #808080;
+  --color-text-disabled: #4D4D4D;
+
+  /* Border Colors */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-default: rgba(255, 255, 255, 0.12);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+  --color-border-focus: rgba(255, 255, 255, 0.4);
+
+  /* Module Accent Colors */
+  --color-accent-home: #FFFFFF;
+  --color-accent-clean: #00D9FF;
+  --color-accent-clean-dark: #00B3D4;
+  --color-accent-clean-soft: rgba(0, 217, 255, 0.15);
+  --color-accent-delete: #FF3366;
+  --color-accent-delete-dark: #CC2952;
+  --color-accent-analyzer: #00AAFF;
+  --color-accent-analyzer-dark: #0088CC;
+  --color-accent-security: #00FF88;
+  --color-accent-security-dark: #00CC6A;
+  --color-accent-security-threat: #FF3366;
+  --color-accent-performance: #FFD700;
+  --color-accent-performance-dark: #CCB000;
+  --color-accent-maintenance: #9966FF;
+  --color-accent-maintenance-dark: #7A52CC;
+
+  /* Status Colors */
+  --color-success: #00FF88;
+  --color-success-bg: rgba(0, 255, 136, 0.1);
+  --color-warning: #FFAA00;
+  --color-warning-bg: rgba(255, 170, 0, 0.1);
+  --color-error: #FF3366;
+  --color-error-bg: rgba(255, 51, 102, 0.1);
+  --color-info: #00AAFF;
+  --color-info-bg: rgba(0, 170, 255, 0.1);
+
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
+
+  /* Font Families */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-display: 'Inter', sans-serif;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.8125rem;    /* 13px */
+  --text-base: 0.875rem;   /* 14px */
+  --text-md: 1rem;         /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.5rem;       /* 24px */
+  --text-2xl: 2rem;        /* 32px */
+  --text-3xl: 3rem;        /* 48px */
+  --text-display: 4rem;    /* 64px */
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Letter Spacing */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ============================================
+     SPACING
+     ============================================ */
+
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* ============================================
+     BORDERS & RADIUS
+     ============================================ */
+
+  --radius-none: 0;
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+
+  --border-width-thin: 1px;
+  --border-width-default: 2px;
+  --border-width-thick: 3px;
+
+  /* ============================================
+     SHADOWS & GLOWS
+     ============================================ */
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.7);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.8);
+
+  /* Glow Effects */
+  --glow-white-subtle: 0 0 10px rgba(255, 255, 255, 0.1);
+  --glow-white-medium: 0 0 20px rgba(255, 255, 255, 0.2);
+  --glow-white-strong: 0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.15);
+  --glow-white-intense: 0 0 40px rgba(255, 255, 255, 0.4), 0 0 80px rgba(255, 255, 255, 0.2), 0 0 120px rgba(255, 255, 255, 0.1);
+
+  /* Module-specific glows */
+  --glow-clean: 0 0 20px rgba(0, 217, 255, 0.3);
+  --glow-delete: 0 0 20px rgba(255, 51, 102, 0.3);
+  --glow-analyzer: 0 0 20px rgba(0, 170, 255, 0.3);
+  --glow-security: 0 0 20px rgba(0, 255, 136, 0.3);
+  --glow-performance: 0 0 20px rgba(255, 215, 0, 0.3);
+  --glow-maintenance: 0 0 20px rgba(153, 102, 255, 0.3);
+
+  /* ============================================
+     TRANSITIONS & ANIMATIONS
+     ============================================ */
+
+  /* Duration */
+  --duration-instant: 50ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --duration-slowest: 1000ms;
+
+  /* Easing */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  /* Common transitions */
+  --transition-fast: all var(--duration-fast) var(--ease-out);
+  --transition-normal: all var(--duration-normal) var(--ease-out);
+  --transition-slow: all var(--duration-slow) var(--ease-out);
+
+  /* ============================================
+     LAYOUT
+     ============================================ */
+
+  /* Z-Index Scale */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-popover: 500;
+  --z-tooltip: 600;
+  --z-toast: 700;
+  --z-maximum: 9999;
+
+  /* Container Widths */
+  --nav-width: 72px;
+  --nav-width-expanded: 200px;
+  --status-bar-height: 32px;
+  --title-bar-height: 40px;
+  --content-max-width: 1400px;
+
+  /* Skull Sizing */
+  --skull-size-sm: 200px;
+  --skull-size-md: 280px;
+  --skull-size-lg: 350px;
+  --skull-size-xl: 400px;
+}
+
+/* ============================================
+   DARK THEME (Default)
+   ============================================ */
+
+[data-theme="dark"],
+.theme-dark,
+:root {
+  color-scheme: dark;
+}
+
+/* ============================================
+   LIGHT THEME
+   ============================================ */
+
+.theme-light {
+  color-scheme: light;
+
+  /* Background Colors - Light Foundation */
+  --color-bg-pure: #FFFFFF;
+  --color-bg-primary: #F8F9FA;
+  --color-bg-secondary: #F1F3F5;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-surface: #E9ECEF;
+  --color-bg-hover: #DEE2E6;
+  --color-bg-active: #CED4DA;
+
+  /* Text Colors - Dark on Light */
+  --color-text-primary: #1A1A2E;
+  --color-text-secondary: #495057;
+  --color-text-tertiary: #6C757D;
+  --color-text-disabled: #ADB5BD;
+
+  /* Border Colors */
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-border-default: rgba(0, 0, 0, 0.1);
+  --color-border-strong: rgba(0, 0, 0, 0.15);
+  --color-border-focus: rgba(0, 0, 0, 0.25);
+
+  /* White transparency becomes black */
+  --color-white-90: rgba(26, 26, 46, 0.9);
+  --color-white-80: rgba(26, 26, 46, 0.8);
+  --color-white-60: rgba(26, 26, 46, 0.6);
+  --color-white-40: rgba(26, 26, 46, 0.4);
+  --color-white-20: rgba(26, 26, 46, 0.2);
+  --color-white-10: rgba(26, 26, 46, 0.1);
+  --color-white-05: rgba(26, 26, 46, 0.05);
+
+  /* Adjusted Shadows for Light */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+  /* Adjusted Glows for Light */
+  --glow-white-subtle: 0 0 10px rgba(0, 0, 0, 0.05);
+  --glow-white-medium: 0 0 20px rgba(0, 0, 0, 0.08);
+  --glow-white-strong: 0 0 30px rgba(0, 0, 0, 0.1);
+  --glow-white-intense: 0 0 40px rgba(0, 0, 0, 0.15);
+
+  /* Module glows - slightly more saturated for light mode */
+  --glow-clean: 0 0 20px rgba(0, 180, 220, 0.25);
+  --glow-delete: 0 0 20px rgba(220, 40, 80, 0.25);
+  --glow-analyzer: 0 0 20px rgba(0, 140, 220, 0.25);
+  --glow-security: 0 0 20px rgba(0, 200, 100, 0.25);
+  --glow-performance: 0 0 20px rgba(200, 170, 0, 0.25);
+  --glow-maintenance: 0 0 20px rgba(130, 80, 220, 0.25);
+
+  /* Module accents - slightly darker for light mode contrast */
+  --color-accent-clean: #00B3D4;
+  --color-accent-analyzer: #0088CC;
+  --color-accent-security: #00CC6A;
+  --color-accent-performance: #CCB000;
+  --color-accent-maintenance: #7A52CC;
+  --color-accent-delete: #CC2952;
+
+  /* Status colors - slightly darker */
+  --color-success: #00CC6A;
+  --color-success-bg: rgba(0, 204, 106, 0.1);
+  --color-warning: #CC8800;
+  --color-warning-bg: rgba(204, 136, 0, 0.1);
+  --color-error: #CC2952;
+  --color-error-bg: rgba(204, 41, 82, 0.1);
+  --color-info: #0088CC;
+  --color-info-bg: rgba(0, 136, 204, 0.1);
+}
+
+/* Light theme - invert skull colors */
+.theme-light .skull-wrapper {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.theme-light .skull-wrapper svg {
+  filter: none;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+.reduced-motion,
+.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not(.reduced-motion-override) * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   SKULL ANIMATION TOGGLE
+   ============================================ */
+
+.skull-wrapper.animations-disabled {
+  animation: none !important;
+}
+
+.skull-wrapper.animations-disabled * {
+  animation: none !important;
+}
+
+/* ============================================
+   MODULE-SPECIFIC THEMING
+   ============================================ */
+
+[data-module="home"] {
+  --accent-current: var(--color-accent-home);
+  --glow-current: var(--glow-white-medium);
+}
+
+[data-module="clean"] {
+  --accent-current: var(--color-accent-clean);
+  --glow-current: var(--glow-clean);
+}
+
+[data-module="delete"] {
+  --accent-current: var(--color-accent-delete);
+  --glow-current: var(--glow-delete);
+}
+
+[data-module="analyzer"] {
+  --accent-current: var(--color-accent-analyzer);
+  --glow-current: var(--glow-analyzer);
+}
+
+[data-module="security"] {
+  --accent-current: var(--color-accent-security);
+  --glow-current: var(--glow-security);
+}
+
+[data-module="performance"] {
+  --accent-current: var(--color-accent-performance);
+  --glow-current: var(--glow-performance);
+}
+
+[data-module="maintenance"] {
+  --accent-current: var(--color-accent-maintenance);
+  --glow-current: var(--glow-maintenance);
+}
+
+[data-module="files"] {
+  --accent-current: #00d4ff;
+  --glow-current: 0 0 20px rgba(0, 212, 255, 0.3);
+}

@@ -1,0 +1,2927 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeadBYTE</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/files.css">
+</head>
+<body>
+  <div id="app">
+    <!-- ============================================
+         TITLE BAR (Custom Window Chrome)
+         ============================================ -->
+    <header class="title-bar">
+      <div class="title-bar-left">
+        <span class="title-bar-text typewriter-title" id="app-title">
+          <span class="typewriter-content"></span><span class="typewriter-cursor">▮</span>
+        </span>
+      </div>
+      <div class="title-bar-controls">
+        <button class="title-bar-btn" id="btn-minimize" title="Minimize">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="2" y1="6" x2="10" y2="6"/>
+          </svg>
+        </button>
+        <button class="title-bar-btn" id="btn-maximize" title="Maximize">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="8" height="8" rx="1"/>
+          </svg>
+        </button>
+        <button class="title-bar-btn title-bar-btn-close" id="btn-close" title="Close">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="2" y1="2" x2="10" y2="10"/>
+            <line x1="10" y1="2" x2="2" y2="10"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============================================
+         ADMIN WARNING BANNER (Hidden by default)
+         ============================================ -->
+    <div class="admin-warning-banner hidden" id="admin-warning-banner">
+      <svg class="admin-warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <span class="admin-warning-text">
+        <strong>Not running as Administrator.</strong>
+        Some file operations (force delete, take ownership, permission changes) will fail.
+        Right-click DeadBYTE and select "Run as administrator" for full functionality.
+      </span>
+      <button class="admin-warning-dismiss" id="admin-warning-dismiss" title="Dismiss">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- ============================================
+         MAIN LAYOUT
+         ============================================ -->
+    <div class="app-layout">
+      <!-- Navigation Sidebar -->
+      <nav class="nav-sidebar">
+        <div class="nav-logo">
+          <img class="nav-logo-icon" src="assets/skull/skull.png" alt="DeadBYTE" width="32" height="32">
+        </div>
+
+        <div class="nav-menu">
+          <!-- Home -->
+          <a class="nav-item active" data-module="home" href="#home">
+            <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            <span class="nav-item-label">Home</span>
+          </a>
+
+          <!-- Analyzer -->
+          <a class="nav-item" data-module="analyzer" href="#analyzer">
+            <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+              <path d="M11 8v6M8 11h6"/>
+            </svg>
+            <span class="nav-item-label">Analyze</span>
+          </a>
+
+          <!-- Performance -->
+          <a class="nav-item" data-module="performance" href="#performance">
+            <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            <span class="nav-item-label">Speed</span>
+          </a>
+
+          <!-- Maintenance -->
+          <a class="nav-item" data-module="maintenance" href="#maintenance">
+            <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
+            <span class="nav-item-label">Maintain</span>
+          </a>
+
+          <!-- Files -->
+          <a class="nav-item" data-module="files" href="#files">
+            <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+              <path d="M12 11v6M9 14h6"/>
+            </svg>
+            <span class="nav-item-label">Files</span>
+          </a>
+        </div>
+
+        <div class="nav-footer">
+          <!-- Settings -->
+          <a class="nav-item" data-module="settings" href="#settings">
+            <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+            </svg>
+            <span class="nav-item-label">Settings</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Main Content Area -->
+      <main class="main-content" data-module="home">
+        <!-- ========================================
+             HOME PAGE
+             ======================================== -->
+        <section class="module-page active" id="page-home">
+          <div class="content-wrapper">
+
+            <!-- ==========================================
+                 VISUAL STAGE - Animated GIF Display
+                 ========================================== -->
+            <div class="visual-stage">
+              <div class="gif-display-frame" id="gif-display">
+                <!-- GIF Container -->
+                <div class="gif-container">
+                  <img class="gif-image active" src="bg/1/Art-Loop.gif" alt="Visual 1" data-index="1">
+                  <img class="gif-image" src="bg/1/Art-Design.gif" alt="Visual 2" data-index="2">
+                  <img class="gif-image" src="bg/1/Dance-Glow.gif" alt="Visual 3" data-index="3">
+                  <img class="gif-image" src="bg/1/Melting.gif" alt="Visual 4" data-index="4">
+                </div>
+
+                <!-- Corner Indicators -->
+                <button class="gif-indicator gif-indicator-tl active" data-target="1">1</button>
+                <button class="gif-indicator gif-indicator-tr" data-target="2">2</button>
+                <button class="gif-indicator gif-indicator-br" data-target="3">3</button>
+                <button class="gif-indicator gif-indicator-bl" data-target="4">4</button>
+              </div>
+            </div>
+
+            <!-- Status Display -->
+            <div class="text-center mt-6">
+              <h1 class="text-2xl tracking-wider" id="home-status-text" style="font-weight: 500; letter-spacing: 0.2em;">SYSTEM READY</h1>
+              <p class="text-secondary mt-2" id="home-last-scan" style="font-size: 13px; opacity: 0.6;">Run a scan to check system health</p>
+            </div>
+
+            <!-- Quick Actions - Refined Premium Icons -->
+            <div class="quick-actions">
+              <button class="action-card" id="home-action-quickscan" data-action="quickscan">
+                <div class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7" opacity="0.9"/>
+                    <path d="M21 21l-4-4"/>
+                    <circle cx="11" cy="11" r="3" stroke-width="1" opacity="0.5"/>
+                  </svg>
+                </div>
+                <span class="action-label">Quick Scan</span>
+                <span class="action-hint">Critical areas</span>
+              </button>
+
+              <button class="action-card" id="home-action-clean" data-action="clean">
+                <div class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16v2H4z" opacity="0.5"/>
+                    <path d="M6 6v13a2 2 0 002 2h8a2 2 0 002-2V6"/>
+                    <path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
+                    <line x1="10" y1="10" x2="10" y2="17" stroke-width="1" opacity="0.7"/>
+                    <line x1="14" y1="10" x2="14" y2="17" stroke-width="1" opacity="0.7"/>
+                  </svg>
+                </div>
+                <span class="action-label">Clean</span>
+                <span class="action-hint">Remove junk</span>
+              </button>
+
+              <button class="action-card" id="home-action-optimize" data-action="optimize">
+                <div class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" opacity="0.4" stroke-width="1"/>
+                    <path d="M12 6v6l4 2"/>
+                    <circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.8"/>
+                  </svg>
+                </div>
+                <span class="action-label">Optimize</span>
+                <span class="action-hint">Boost speed</span>
+              </button>
+
+              <button class="action-card" id="home-action-fullscan" data-action="fullscan">
+                <div class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V7l7-4z" opacity="0.9"/>
+                    <path d="M9 12l2 2 4-4" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <span class="action-label">Full Scan</span>
+                <span class="action-hint">Deep analysis</span>
+              </button>
+            </div>
+
+            <!-- Quick Stats - Refined -->
+            <div class="stats-grid" id="home-stats-grid">
+              <div class="stat-card" data-stat="junk">
+                <div class="stat-value" id="home-stat-junk" style="color: var(--color-accent-analyzer);">—</div>
+                <div class="stat-label">Junk Found</div>
+                <div class="stat-bar">
+                  <div class="stat-bar-fill" id="home-stat-junk-bar" style="width: 0%; background: var(--color-accent-analyzer);"></div>
+                </div>
+              </div>
+              <div class="stat-card" data-stat="threats">
+                <div class="stat-value" id="home-stat-threats" style="color: var(--color-success);">0</div>
+                <div class="stat-label">Threats</div>
+                <div class="stat-bar">
+                  <div class="stat-bar-fill" id="home-stat-threats-bar" style="width: 0%; background: var(--color-success);"></div>
+                </div>
+              </div>
+              <div class="stat-card" data-stat="health">
+                <div class="stat-value" id="home-stat-health" style="color: var(--color-accent-performance);">—</div>
+                <div class="stat-label">Health</div>
+                <div class="stat-bar">
+                  <div class="stat-bar-fill" id="home-stat-health-bar" style="width: 0%; background: var(--color-accent-performance);"></div>
+                </div>
+              </div>
+              <div class="stat-card" data-stat="uptime">
+                <div class="stat-value" id="home-stat-uptime" style="color: var(--color-warning);">—</div>
+                <div class="stat-label">Uptime</div>
+                <div class="stat-bar">
+                  <div class="stat-bar-fill" id="home-stat-uptime-bar" style="width: 0%; background: var(--color-warning);"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================
+             ANALYZER MODULE - System Intelligence Center
+             ======================================== -->
+        <section class="module-page" id="page-analyzer">
+          <header class="module-header" data-module="analyzer">
+            <div class="module-header-content">
+              <h1 class="content-title" style="color: var(--color-accent-analyzer);">Analyzer</h1>
+              <p class="content-subtitle">Deep system intelligence and space recovery insights</p>
+            </div>
+            <div class="module-header-status">
+              <div class="status-chip status-chip-analyzer">
+                <span class="status-chip-dot"></span>
+                Ready to Scan
+              </div>
+            </div>
+          </header>
+
+          <div class="module-body analyzer-module">
+            <!-- ==========================================
+                 SCAN MODE SELECTOR
+                 ========================================== -->
+            <div class="analyzer-modes">
+              <h3 class="section-label">Analysis Mode</h3>
+              <div class="scan-mode-cards">
+                <!-- Quick Scan -->
+                <button class="scan-mode-card" data-mode="quick">
+                  <div class="scan-mode-icon scan-mode-icon-quick">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                  </div>
+                  <div class="scan-mode-info">
+                    <h4 class="scan-mode-title">Quick Scan</h4>
+                    <p class="scan-mode-desc">Common junk locations</p>
+                  </div>
+                  <div class="scan-mode-meta">
+                    <span class="scan-mode-time">~30 sec</span>
+                  </div>
+                </button>
+
+                <!-- Full Scan -->
+                <button class="scan-mode-card scan-mode-card-recommended active" data-mode="full">
+                  <div class="scan-mode-badge">Recommended</div>
+                  <div class="scan-mode-icon scan-mode-icon-full">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <circle cx="11" cy="11" r="8"/>
+                      <path d="M21 21l-4.35-4.35"/>
+                      <circle cx="11" cy="11" r="3"/>
+                    </svg>
+                  </div>
+                  <div class="scan-mode-info">
+                    <h4 class="scan-mode-title">Full Scan</h4>
+                    <p class="scan-mode-desc">Complete system analysis</p>
+                  </div>
+                  <div class="scan-mode-meta">
+                    <span class="scan-mode-time">~3 min</span>
+                  </div>
+                </button>
+
+                <!-- Custom Scan -->
+                <button class="scan-mode-card" data-mode="custom">
+                  <div class="scan-mode-icon scan-mode-icon-custom">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                    </svg>
+                  </div>
+                  <div class="scan-mode-info">
+                    <h4 class="scan-mode-title">Custom Scan</h4>
+                    <p class="scan-mode-desc">Select specific locations</p>
+                  </div>
+                  <div class="scan-mode-meta">
+                    <span class="scan-mode-time">Variable</span>
+                  </div>
+                </button>
+              </div>
+
+              <!-- Start Scan Button -->
+              <div class="scan-start-container">
+                <button class="btn-scan-start" id="junk-scan-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                  Start Analysis
+                </button>
+              </div>
+
+              <!-- Scan Progress -->
+              <div class="scan-progress hidden" id="junk-progress-container">
+                <div class="scan-progress-bar">
+                  <div class="scan-progress-fill" id="junk-progress-bar"></div>
+                </div>
+                <span class="scan-progress-text" id="junk-progress-text">Scanning...</span>
+              </div>
+            </div>
+
+            <!-- ==========================================
+                 ANALYSIS RESULTS (shown after scan)
+                 ========================================== -->
+            <div class="analyzer-results">
+              <!-- Summary Dashboard -->
+              <div class="results-dashboard">
+                <h3 class="section-label">Analysis Summary</h3>
+                <div class="dashboard-grid">
+                  <!-- Recoverable Space Stat Card -->
+                  <div class="dashboard-card dashboard-card-visual recoverable-stat-card">
+                    <div class="recoverable-main">
+                      <span class="recoverable-value" id="junk-total-size">—</span>
+                      <span class="recoverable-label">RECOVERABLE SPACE</span>
+                    </div>
+                    <div class="recoverable-progress">
+                      <div class="recoverable-progress-bar" id="junk-progress-fill"></div>
+                    </div>
+                    <div class="recoverable-legend">
+                      <div class="legend-row">
+                        <span class="legend-dot legend-dot-junk"></span>
+                        <span class="legend-label">Junk Files</span>
+                        <span class="legend-value" id="junk-legend-size">—</span>
+                      </div>
+                      <div class="legend-row">
+                        <span class="legend-dot legend-dot-system"></span>
+                        <span class="legend-label">System Data</span>
+                        <span class="legend-value" id="system-data-size">—</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Key Metrics -->
+                  <div class="dashboard-card dashboard-card-metrics">
+                    <div class="metric-item metric-item-primary">
+                      <div class="metric-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                          <path d="M14 2v6h6"/>
+                        </svg>
+                      </div>
+                      <div class="metric-data">
+                        <span class="metric-value" id="junk-files-analyzed">—</span>
+                        <span class="metric-label">Files Analyzed</span>
+                      </div>
+                    </div>
+                    <div class="metric-item">
+                      <div class="metric-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                        </svg>
+                      </div>
+                      <div class="metric-data">
+                        <span class="metric-value" id="junk-total-files">—</span>
+                        <span class="metric-label">Junk Items</span>
+                      </div>
+                    </div>
+                    <div class="metric-item">
+                      <div class="metric-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <rect x="3" y="3" width="7" height="7" rx="1"/>
+                          <rect x="14" y="3" width="7" height="7" rx="1"/>
+                          <rect x="3" y="14" width="7" height="7" rx="1"/>
+                          <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                      </div>
+                      <div class="metric-data">
+                        <span class="metric-value" id="junk-categories-count">—</span>
+                        <span class="metric-label">Categories</span>
+                      </div>
+                    </div>
+                    <div class="metric-item metric-item-success">
+                      <div class="metric-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <circle cx="12" cy="12" r="10"/>
+                          <path d="M12 6v6l4 2"/>
+                        </svg>
+                      </div>
+                      <div class="metric-data">
+                        <span class="metric-value" id="junk-scan-duration">—</span>
+                        <span class="metric-label">Scan Duration</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Insights Panel -->
+                  <div class="dashboard-card dashboard-card-insights">
+                    <h4 class="insights-title">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4M12 8h.01"/>
+                      </svg>
+                      Smart Insights
+                    </h4>
+                    <div class="insights-list" id="junk-insights-list">
+                      <div class="insight-item insight-item-info">
+                        <span class="insight-icon">i</span>
+                        <span class="insight-text">Run a scan to see smart insights</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Category Breakdown -->
+              <div class="results-categories">
+                <div class="categories-header">
+                  <h3 class="section-label">Category Breakdown</h3>
+                  <div class="categories-actions">
+                    <button class="btn btn-sm btn-ghost" id="junk-select-all-safe">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 11 12 14 22 4"/>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                      </svg>
+                      Select All Safe
+                    </button>
+                    <button class="btn btn-sm btn-ghost" id="junk-deselect-all">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                      </svg>
+                      Deselect All
+                    </button>
+                  </div>
+                </div>
+
+                <div class="category-list" id="junk-categories">
+                  <!-- Dynamically populated by JunkScanner -->
+                  <div class="junk-loading">
+                    <div class="spinner"></div>
+                    <span>Loading categories...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================================
+                 ACTION BAR
+                 ========================================== -->
+            <div class="analyzer-actions">
+              <div class="action-summary">
+                <div class="summary-selected">
+                  <span class="summary-count" id="junk-selected-count">0</span> categories selected
+                  <span class="summary-divider">•</span>
+                  <span class="summary-size" id="junk-selected-size">0 B</span> recoverable
+                </div>
+              </div>
+              <div class="action-buttons">
+                <button class="btn btn-lg btn-ghost" id="junk-export-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                  </svg>
+                  Export Report
+                </button>
+                <button class="btn btn-lg btn-analyzer" id="junk-clean-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                  </svg>
+                  Clean Selected
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================
+             PERFORMANCE PAGE
+             ======================================== -->
+        <section class="module-page" id="page-performance">
+          <header class="module-header" data-module="performance">
+            <div class="module-header-content">
+              <h1 class="content-title" style="color: var(--color-accent-performance);">Performance</h1>
+              <p class="content-subtitle">Optimize system speed and startup time</p>
+            </div>
+            <div class="module-header-status">
+              <div class="status-chip status-chip-performance">
+                <span class="status-chip-dot"></span>
+                Ready to Optimize
+              </div>
+            </div>
+          </header>
+          <div class="module-body">
+            <div class="performance-module">
+
+              <!-- Mode Selector -->
+              <div class="performance-modes">
+                <div class="section-label">Optimization Mode</div>
+                <div class="mode-cards">
+                  <div class="mode-card perf-mode-card" data-mode="quick">
+                    <div class="mode-icon mode-icon-quick">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                      </svg>
+                    </div>
+                    <div class="mode-info">
+                      <span class="mode-title">Quick Tune</span>
+                      <span class="mode-desc">Basic startup optimization</span>
+                    </div>
+                    <div class="mode-meta">
+                      <span class="mode-risk risk-low">Safe</span>
+                      <span class="mode-time">~30 sec</span>
+                    </div>
+                  </div>
+                  <div class="mode-card perf-mode-card active" data-mode="full">
+                    <span class="mode-badge">Recommended</span>
+                    <div class="mode-icon mode-icon-perf">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                      </svg>
+                    </div>
+                    <div class="mode-info">
+                      <span class="mode-title">Full Optimize</span>
+                      <span class="mode-desc">Complete performance tuning</span>
+                    </div>
+                    <div class="mode-meta">
+                      <span class="mode-risk risk-medium">Moderate</span>
+                      <span class="mode-time">~2 min</span>
+                    </div>
+                  </div>
+                  <div class="mode-card perf-mode-card" data-mode="custom">
+                    <div class="mode-icon mode-icon-advanced">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                      </svg>
+                    </div>
+                    <div class="mode-info">
+                      <span class="mode-title">Custom</span>
+                      <span class="mode-desc">Select specific optimizations</span>
+                    </div>
+                    <div class="mode-meta">
+                      <span class="mode-risk risk-high">Advanced</span>
+                      <span class="mode-time">Varies</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resource Monitor Dashboard -->
+              <div class="performance-dashboard">
+                <div class="section-label">System Resources</div>
+                <div class="perf-dashboard-grid">
+                  <!-- Performance Score -->
+                  <div class="perf-card perf-card-score">
+                    <div class="perf-score-ring" id="perf-score-ring">
+                      <svg viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                        <circle id="perf-score-ring-progress" cx="60" cy="60" r="54" fill="none" stroke="var(--color-accent-performance)" stroke-width="8"
+                                stroke-dasharray="339.3" stroke-dashoffset="339.3" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                      </svg>
+                      <div class="perf-score-center">
+                        <span class="perf-score-value" id="perf-score-value">—</span>
+                        <span class="perf-score-label">Score</span>
+                      </div>
+                    </div>
+                    <div class="perf-score-status">
+                      <span class="perf-status-text" id="perf-status-text">Analyzing...</span>
+                      <span class="perf-status-hint" id="perf-status-hint">Gathering system metrics</span>
+                    </div>
+                  </div>
+
+                  <!-- Resource Metrics Grid -->
+                  <div class="perf-card perf-card-metrics" id="perf-metrics-grid">
+                    <div class="perf-metric-item" data-metric="cpu">
+                      <div class="perf-metric-ring" data-value="0">
+                        <svg viewBox="0 0 48 48">
+                          <circle cx="24" cy="24" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                          <circle id="perf-cpu-ring" cx="24" cy="24" r="20" fill="none" stroke="var(--color-success)" stroke-width="4"
+                                  stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round" transform="rotate(-90 24 24)"/>
+                        </svg>
+                        <span class="perf-metric-value" id="perf-cpu-value">—</span>
+                      </div>
+                      <div class="perf-metric-info">
+                        <span class="perf-metric-label">CPU Usage</span>
+                        <span class="perf-metric-detail" id="perf-cpu-detail">Loading...</span>
+                      </div>
+                    </div>
+                    <div class="perf-metric-item" data-metric="memory">
+                      <div class="perf-metric-ring" data-value="0">
+                        <svg viewBox="0 0 48 48">
+                          <circle cx="24" cy="24" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                          <circle id="perf-memory-ring" cx="24" cy="24" r="20" fill="none" stroke="var(--color-success)" stroke-width="4"
+                                  stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round" transform="rotate(-90 24 24)"/>
+                        </svg>
+                        <span class="perf-metric-value" id="perf-memory-value">—</span>
+                      </div>
+                      <div class="perf-metric-info">
+                        <span class="perf-metric-label">Memory</span>
+                        <span class="perf-metric-detail" id="perf-memory-detail">Loading...</span>
+                      </div>
+                    </div>
+                    <div class="perf-metric-item" data-metric="disk">
+                      <div class="perf-metric-ring" data-value="0">
+                        <svg viewBox="0 0 48 48">
+                          <circle cx="24" cy="24" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                          <circle id="perf-disk-ring" cx="24" cy="24" r="20" fill="none" stroke="var(--color-success)" stroke-width="4"
+                                  stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round" transform="rotate(-90 24 24)"/>
+                        </svg>
+                        <span class="perf-metric-value" id="perf-disk-value">—</span>
+                      </div>
+                      <div class="perf-metric-info">
+                        <span class="perf-metric-label">Disk I/O</span>
+                        <span class="perf-metric-detail" id="perf-disk-detail">Loading...</span>
+                      </div>
+                    </div>
+                    <div class="perf-metric-item" data-metric="network">
+                      <div class="perf-metric-ring" data-value="0">
+                        <svg viewBox="0 0 48 48">
+                          <circle cx="24" cy="24" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                          <circle id="perf-network-ring" cx="24" cy="24" r="20" fill="none" stroke="var(--color-success)" stroke-width="4"
+                                  stroke-dasharray="125.7" stroke-dashoffset="125.7" stroke-linecap="round" transform="rotate(-90 24 24)"/>
+                        </svg>
+                        <span class="perf-metric-value" id="perf-network-value">—</span>
+                      </div>
+                      <div class="perf-metric-info">
+                        <span class="perf-metric-label">Network</span>
+                        <span class="perf-metric-detail" id="perf-network-detail">Loading...</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Startup Impact Summary -->
+                  <div class="perf-card perf-card-startup">
+                    <div class="perf-startup-header">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                      </svg>
+                      <span>Startup Analysis</span>
+                    </div>
+                    <div class="perf-startup-time">
+                      <span class="perf-startup-value" id="startup-boot-time">—</span>
+                      <span class="perf-startup-label">Est. Delay</span>
+                    </div>
+                    <div class="perf-startup-breakdown">
+                      <div class="perf-startup-stat">
+                        <span class="perf-stat-count perf-stat-high" id="startup-high-count">—</span>
+                        <span class="perf-stat-label">High Impact</span>
+                      </div>
+                      <div class="perf-startup-stat">
+                        <span class="perf-stat-count perf-stat-medium" id="startup-medium-count">—</span>
+                        <span class="perf-stat-label">Medium</span>
+                      </div>
+                      <div class="perf-startup-stat">
+                        <span class="perf-stat-count perf-stat-low" id="startup-low-count">—</span>
+                        <span class="perf-stat-label">Low</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Startup Programs Section -->
+              <div class="performance-startup">
+                <div class="categories-header">
+                  <span class="section-label">Startup Programs</span>
+                  <div class="categories-actions">
+                    <button class="btn-ghost">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"/>
+                        <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+                      </svg>
+                      Refresh
+                    </button>
+                  </div>
+                </div>
+                <div class="startup-list" id="startup-list">
+                  <!-- Dynamically populated by StartupManager -->
+                  <div class="startup-loading">
+                    <div class="spinner"></div>
+                    <span>Loading startup programs...</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Services Section -->
+              <div class="performance-services">
+                <div class="categories-header">
+                  <span class="section-label">Windows Services</span>
+                  <div class="categories-actions">
+                    <div class="filter-dropdown" id="services-filter-dropdown">
+                      <button class="btn-ghost" id="btn-services-filter">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                        </svg>
+                        Filter
+                      </button>
+                      <div class="filter-menu hidden" id="services-filter-menu">
+                        <label class="filter-option">
+                          <input type="checkbox" checked data-filter="background">
+                          <span>Background Services</span>
+                        </label>
+                        <label class="filter-option">
+                          <input type="checkbox" checked data-filter="security">
+                          <span>Security Services</span>
+                        </label>
+                        <label class="filter-option">
+                          <input type="checkbox" checked data-filter="display">
+                          <span>Display & Graphics</span>
+                        </label>
+                        <label class="filter-option">
+                          <input type="checkbox" checked data-filter="system">
+                          <span>System Services</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="services-grid" id="services-grid">
+                  <div class="service-category" data-category="background">
+                    <div class="service-category-header">
+                      <div class="service-category-icon" style="background: rgba(255, 170, 0, 0.1);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning)" stroke-width="2">
+                          <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                          <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                          <line x1="6" y1="6" x2="6.01" y2="6"/>
+                          <line x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                      </div>
+                      <div class="service-category-info">
+                        <span class="service-category-name">Background Services</span>
+                        <span class="service-category-count" id="svc-background-count">— running</span>
+                      </div>
+                      <span class="service-category-impact" id="svc-background-impact">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="service-category" data-category="security">
+                    <div class="service-category-header">
+                      <div class="service-category-icon" style="background: rgba(0, 255, 136, 0.1);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                      </div>
+                      <div class="service-category-info">
+                        <span class="service-category-name">Security Services</span>
+                        <span class="service-category-count" id="svc-security-count">— running</span>
+                      </div>
+                      <span class="service-category-impact" id="svc-security-impact">Essential</span>
+                    </div>
+                  </div>
+                  <div class="service-category" data-category="display">
+                    <div class="service-category-header">
+                      <div class="service-category-icon" style="background: rgba(0, 170, 255, 0.1);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-info)" stroke-width="2">
+                          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                          <line x1="8" y1="21" x2="16" y2="21"/>
+                          <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                      </div>
+                      <div class="service-category-info">
+                        <span class="service-category-name">Display & Graphics</span>
+                        <span class="service-category-count" id="svc-display-count">— running</span>
+                      </div>
+                      <span class="service-category-impact" id="svc-display-impact">Loading...</span>
+                    </div>
+                  </div>
+                  <div class="service-category" data-category="system">
+                    <div class="service-category-header">
+                      <div class="service-category-icon" style="background: rgba(153, 102, 255, 0.1);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-maintenance)" stroke-width="2">
+                          <circle cx="12" cy="12" r="3"/>
+                          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 0v-.09A1.65 1.65 0 009 19.4"/>
+                        </svg>
+                      </div>
+                      <div class="service-category-info">
+                        <span class="service-category-name">System Services</span>
+                        <span class="service-category-count" id="svc-system-count">— running</span>
+                      </div>
+                      <span class="service-category-impact" id="svc-system-impact">Required</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Bar -->
+              <div class="performance-actions">
+                <div class="action-summary">
+                  <span class="summary-selected">
+                    <span class="summary-count" id="startup-selected-count">0</span> programs selected
+                  </span>
+                  <span class="summary-divider">|</span>
+                  <span class="summary-size">Potential savings: <strong id="startup-potential-savings">0s</strong> boot time</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-ghost" id="btn-startup-rescan">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="1 4 1 10 7 10"/>
+                      <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+                    </svg>
+                    <span class="btn-text">Rescan</span>
+                  </button>
+                  <button class="btn-performance" id="btn-optimize-selected">
+                    <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                    <span class="btn-text">Optimize Selected</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================
+             MAINTENANCE PAGE
+             ======================================== -->
+        <section class="module-page" id="page-maintenance">
+          <header class="module-header" data-module="maintenance">
+            <div class="module-header-content">
+              <h1 class="content-title" style="color: var(--color-accent-maintenance);">Maintenance</h1>
+              <p class="content-subtitle">System health and repair tools</p>
+            </div>
+            <div class="module-header-status">
+              <div class="status-chip status-chip-maintenance">
+                <span class="status-chip-dot"></span>
+                System Healthy
+              </div>
+            </div>
+          </header>
+          <div class="module-body">
+            <div class="maintenance-module">
+
+              <!-- Mode Selector -->
+              <div class="maintenance-modes">
+                <div class="section-label">Scan Mode</div>
+                <div class="mode-cards">
+                  <div class="mode-card maint-mode-card" data-mode="quick">
+                    <div class="mode-icon mode-icon-quick">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                      </svg>
+                    </div>
+                    <div class="mode-info">
+                      <span class="mode-title">Quick Check</span>
+                      <span class="mode-desc">Essential health checks</span>
+                    </div>
+                    <div class="mode-meta">
+                      <span class="mode-risk risk-low">Safe</span>
+                      <span class="mode-time">~1 min</span>
+                    </div>
+                  </div>
+                  <div class="mode-card maint-mode-card active" data-mode="deep">
+                    <span class="mode-badge">Recommended</span>
+                    <div class="mode-icon mode-icon-maint">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                      </svg>
+                    </div>
+                    <div class="mode-info">
+                      <span class="mode-title">Deep Scan</span>
+                      <span class="mode-desc">Full system analysis</span>
+                    </div>
+                    <div class="mode-meta">
+                      <span class="mode-risk risk-medium">Thorough</span>
+                      <span class="mode-time">~5 min</span>
+                    </div>
+                  </div>
+                  <div class="mode-card maint-mode-card" data-mode="custom">
+                    <div class="mode-icon mode-icon-advanced">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                      </svg>
+                    </div>
+                    <div class="mode-info">
+                      <span class="mode-title">Custom</span>
+                      <span class="mode-desc">Select specific checks</span>
+                    </div>
+                    <div class="mode-meta">
+                      <span class="mode-risk risk-high">Advanced</span>
+                      <span class="mode-time">Varies</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Health Dashboard -->
+              <div class="maintenance-dashboard">
+                <div class="section-label">System Health</div>
+                <div class="maint-dashboard-grid">
+                  <!-- Health Score -->
+                  <div class="maint-card maint-card-score">
+                    <div class="maint-score-ring">
+                      <svg viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+                        <circle id="maint-health-ring" cx="60" cy="60" r="54" fill="none" stroke="var(--color-accent-maintenance)" stroke-width="8"
+                                stroke-dasharray="339.3" stroke-dashoffset="34" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                      </svg>
+                      <div class="maint-score-center">
+                        <span class="maint-score-value" id="maint-health-score">--</span>
+                        <span class="maint-score-label">Health</span>
+                      </div>
+                    </div>
+                    <div class="maint-score-status">
+                      <span class="maint-status-text" id="maint-status-text">Run a scan</span>
+                      <span class="maint-status-hint" id="maint-status-hint">Click "Rescan All" to check</span>
+                    </div>
+                  </div>
+
+                  <!-- Health Metrics Grid -->
+                  <div class="maint-card maint-card-metrics">
+                    <div class="maint-metric-item maint-metric-success">
+                      <div class="maint-metric-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                          <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                      </div>
+                      <div class="maint-metric-info">
+                        <span class="maint-metric-value" id="maint-critical-count">0</span>
+                        <span class="maint-metric-label">Critical Issues</span>
+                      </div>
+                    </div>
+                    <div class="maint-metric-item maint-metric-warning">
+                      <div class="maint-metric-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="12" y1="8" x2="12" y2="12"/>
+                          <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                      </div>
+                      <div class="maint-metric-info">
+                        <span class="maint-metric-value" id="maint-warnings-count">0</span>
+                        <span class="maint-metric-label">Warnings</span>
+                      </div>
+                    </div>
+                    <div class="maint-metric-item maint-metric-info">
+                      <div class="maint-metric-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="12" y1="16" x2="12" y2="12"/>
+                          <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                      </div>
+                      <div class="maint-metric-info">
+                        <span class="maint-metric-value" id="maint-recs-count">0</span>
+                        <span class="maint-metric-label">Recommendations</span>
+                      </div>
+                    </div>
+                    <div class="maint-metric-item maint-metric-neutral">
+                      <div class="maint-metric-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"/>
+                          <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                      </div>
+                      <div class="maint-metric-info">
+                        <span class="maint-metric-value" id="maint-last-scan">Never</span>
+                        <span class="maint-metric-label">Last Full Scan</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Quick Insights -->
+                  <div class="maint-card maint-card-insights">
+                    <div class="maint-insights-header">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                      </svg>
+                      <span>Quick Insights</span>
+                    </div>
+                    <div class="maint-insights-list" id="maint-insights">
+                      <div class="maint-insight maint-insight-info">
+                        <span class="maint-insight-icon">i</span>
+                        <span class="maint-insight-text">Run a health check to see insights</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Registry Cleaner Section -->
+              <div class="maintenance-registry">
+                <div class="categories-header">
+                  <span class="section-label">Registry Issues</span>
+                  <div class="categories-actions">
+                    <button class="btn-ghost" id="maint-registry-rescan-btn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"/>
+                        <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+                      </svg>
+                      Rescan
+                    </button>
+                  </div>
+                </div>
+                <div class="registry-list" id="maint-registry-list">
+                  <div class="registry-row registry-row-safe">
+                    <div class="registry-icon registry-icon-safe">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                      </svg>
+                    </div>
+                    <div class="registry-info">
+                      <span class="registry-name">Run a Health Check</span>
+                      <span class="registry-detail">Click "Rescan All" to scan registry for issues</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Disk Health Section -->
+              <div class="maintenance-disk">
+                <div class="categories-header">
+                  <span class="section-label">Disk Health (SMART Status)</span>
+                </div>
+                <div class="disk-list" id="maint-disk-list">
+                  <div class="disk-row disk-row-healthy">
+                    <div class="disk-status-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                      </svg>
+                    </div>
+                    <div class="disk-info">
+                      <span class="disk-name">Run a Health Check</span>
+                      <span class="disk-detail">Click "Rescan All" to check disk health</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- System Tools Grid -->
+              <div class="maintenance-tools">
+                <div class="section-label">Repair Tools</div>
+                <div class="tools-grid">
+                  <div class="tool-card">
+                    <div class="tool-icon" style="--tool-color: var(--color-accent-maintenance);">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                      </svg>
+                    </div>
+                    <div class="tool-info">
+                      <span class="tool-name">System File Checker</span>
+                      <span class="tool-desc">Scan and repair Windows system files</span>
+                    </div>
+                    <button class="btn-tool" id="maint-sfc-btn">Run SFC</button>
+                  </div>
+                  <div class="tool-card">
+                    <div class="tool-icon" style="--tool-color: var(--color-info);">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                        <line x1="6" y1="6" x2="6.01" y2="6"/>
+                        <line x1="6" y1="18" x2="6.01" y2="18"/>
+                      </svg>
+                    </div>
+                    <div class="tool-info">
+                      <span class="tool-name">DISM Repair</span>
+                      <span class="tool-desc">Repair Windows component store</span>
+                    </div>
+                    <button class="btn-tool" id="maint-dism-btn">Run DISM</button>
+                  </div>
+                  <div class="tool-card">
+                    <div class="tool-icon" style="--tool-color: var(--color-warning);">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="4 17 10 11 4 5"/>
+                        <line x1="12" y1="19" x2="20" y2="19"/>
+                      </svg>
+                    </div>
+                    <div class="tool-info">
+                      <span class="tool-name">Check Disk</span>
+                      <span class="tool-desc">Scan for file system errors</span>
+                    </div>
+                    <button class="btn-tool" id="maint-chkdsk-btn">Run CHKDSK</button>
+                  </div>
+                  <div class="tool-card">
+                    <div class="tool-icon" style="--tool-color: var(--color-success);">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"/>
+                        <polyline points="23 20 23 14 17 14"/>
+                        <path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+                      </svg>
+                    </div>
+                    <div class="tool-info">
+                      <span class="tool-name">Reset Windows Update</span>
+                      <span class="tool-desc">Clear update cache and components</span>
+                    </div>
+                    <button class="btn-tool" id="maint-reset-update-btn">Reset</button>
+                  </div>
+                </div>
+
+                <!-- Terminal Output Panel -->
+                <div class="repair-terminal-container hidden" id="repair-terminal-container">
+                  <div class="repair-terminal-header">
+                    <div class="terminal-title">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="4 17 10 11 4 5"/>
+                        <line x1="12" y1="19" x2="20" y2="19"/>
+                      </svg>
+                      <span id="repair-terminal-title">Command Output</span>
+                    </div>
+                    <div class="terminal-controls">
+                      <span class="terminal-elapsed" id="repair-terminal-elapsed">00:00</span>
+                      <button class="terminal-btn" id="repair-terminal-copy" title="Copy Output">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                        </svg>
+                      </button>
+                      <button class="terminal-btn terminal-close" id="repair-terminal-close" title="Close">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <line x1="18" y1="6" x2="6" y2="18"/>
+                          <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="repair-terminal-output" id="repair-terminal-output">
+                    <div class="terminal-line terminal-info">Waiting for command...</div>
+                  </div>
+                  <div class="repair-terminal-status" id="repair-terminal-status">
+                    <span class="status-indicator status-idle"></span>
+                    <span class="status-text">Ready</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Scan Progress -->
+              <div class="scan-progress maint-scan-progress hidden" id="maint-progress-container">
+                <div class="scan-progress-bar">
+                  <div class="scan-progress-fill" id="maint-progress-bar"></div>
+                </div>
+                <span class="scan-progress-text" id="maint-progress-text">Scanning...</span>
+              </div>
+
+              <!-- Action Bar -->
+              <div class="maintenance-actions">
+                <div class="action-summary">
+                  <span class="summary-selected">
+                    <span class="summary-count" id="maint-selected-count">0</span> issues selected
+                  </span>
+                  <span class="summary-divider">|</span>
+                  <span class="summary-size"><strong id="maint-selected-entries">0</strong> registry entries to clean</span>
+                </div>
+                <div class="action-buttons">
+                  <button class="btn-ghost" id="maint-rescan-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="1 4 1 10 7 10"/>
+                      <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+                    </svg>
+                    Rescan All
+                  </button>
+                  <button class="btn-maintenance" id="maint-fix-btn" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                    Fix Selected Issues
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================
+             SETTINGS PAGE
+             ======================================== -->
+        <section class="module-page" id="page-settings">
+          <header class="module-header">
+            <div class="module-header-content">
+              <h1 class="content-title">Settings</h1>
+              <p class="content-subtitle">Configure DeadBYTE preferences</p>
+            </div>
+          </header>
+          <div class="module-body">
+            <div class="settings-module">
+
+              <!-- Settings Navigation & Content Layout -->
+              <div class="settings-layout">
+                <!-- Settings Sidebar -->
+                <nav class="settings-nav">
+                  <div class="settings-nav-item active" data-section="general">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="3"/>
+                      <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                    </svg>
+                    <span>General</span>
+                  </div>
+                  <div class="settings-nav-item" data-section="scanning">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"/>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <span>Scan Settings</span>
+                  </div>
+                  <div class="settings-nav-item" data-section="appearance">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="13.5" cy="6.5" r="2.5"/>
+                      <circle cx="19" cy="17" r="2.5"/>
+                      <circle cx="6" cy="12" r="2.5"/>
+                      <path d="M16 6.5a6 6 0 00-6 6 6 6 0 006.5 6"/>
+                    </svg>
+                    <span>Appearance</span>
+                  </div>
+                  <div class="settings-nav-item" data-section="notifications">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                      <path d="M13.73 21a2 2 0 01-3.46 0"/>
+                    </svg>
+                    <span>Notifications</span>
+                  </div>
+                  <div class="settings-nav-item" data-section="privacy">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span>Privacy & Data</span>
+                  </div>
+                  <div class="settings-nav-item" data-section="advanced">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="4 17 10 11 4 5"/>
+                      <line x1="12" y1="19" x2="20" y2="19"/>
+                    </svg>
+                    <span>Advanced</span>
+                  </div>
+                  <div class="settings-nav-item" data-section="about">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="12" y1="16" x2="12" y2="12"/>
+                      <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                    <span>About</span>
+                  </div>
+                </nav>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+
+                  <!-- General Section -->
+                  <div class="settings-section active" id="settings-general">
+                    <div class="settings-section-header">
+                      <h2 class="settings-section-title">General Settings</h2>
+                      <p class="settings-section-desc">Configure basic application behavior</p>
+                    </div>
+                    <div class="settings-card">
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Start with Windows</span>
+                          <span class="settings-row-desc">Launch DeadBYTE automatically when Windows starts</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox">
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Minimize to system tray</span>
+                          <span class="settings-row-desc">Keep running in the background when window is closed</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Check for updates automatically</span>
+                          <span class="settings-row-desc">Receive notifications when new versions are available</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Scan Settings Section -->
+                  <div class="settings-section" id="settings-scanning">
+                    <div class="settings-section-header">
+                      <h2 class="settings-section-title">Scan Settings</h2>
+                      <p class="settings-section-desc">Configure default scanning behavior</p>
+                    </div>
+                    <div class="settings-card">
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Default scan mode</span>
+                          <span class="settings-row-desc">Choose the default mode for all scans</span>
+                        </div>
+                        <select class="settings-select">
+                          <option value="quick">Quick Scan</option>
+                          <option value="smart" selected>Smart Scan (Recommended)</option>
+                          <option value="deep">Deep Scan</option>
+                        </select>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Auto-scan on startup</span>
+                          <span class="settings-row-desc">Automatically run a quick scan when DeadBYTE starts</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox">
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Real-time monitoring</span>
+                          <span class="settings-row-desc">Monitor system for junk files in real-time</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="settings-card">
+                      <div class="settings-card-header">
+                        <span class="settings-card-title">Exclusion Paths</span>
+                        <button class="btn-ghost btn-sm">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                          </svg>
+                          Add Path
+                        </button>
+                      </div>
+                      <div class="exclusion-list">
+                        <div class="exclusion-item">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                          </svg>
+                          <span class="exclusion-path">C:\Users\*\Documents\Important</span>
+                          <button class="exclusion-remove">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <line x1="18" y1="6" x2="6" y2="18"/>
+                              <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                          </button>
+                        </div>
+                        <div class="exclusion-item">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                          </svg>
+                          <span class="exclusion-path">D:\Projects</span>
+                          <button class="exclusion-remove">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <line x1="18" y1="6" x2="6" y2="18"/>
+                              <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Appearance Section -->
+                  <div class="settings-section" id="settings-appearance">
+                    <div class="settings-section-header">
+                      <h2 class="settings-section-title">Appearance</h2>
+                      <p class="settings-section-desc">Customize the visual experience</p>
+                    </div>
+                    <div class="settings-card">
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Scanline effect</span>
+                          <span class="settings-row-desc">Enable retro CRT scanline overlay effect</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Vignette effect</span>
+                          <span class="settings-row-desc">Dark corners overlay for immersive look</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Skull animations</span>
+                          <span class="settings-row-desc">Enable animated skull visual effects</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Reduced motion</span>
+                          <span class="settings-row-desc">Minimize animations for accessibility</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox">
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Notifications Section -->
+                  <div class="settings-section" id="settings-notifications">
+                    <div class="settings-section-header">
+                      <h2 class="settings-section-title">Notifications</h2>
+                      <p class="settings-section-desc">Control when and how you receive alerts</p>
+                    </div>
+                    <div class="settings-card">
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Enable notifications</span>
+                          <span class="settings-row-desc">Show system notifications for events</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Scan complete alerts</span>
+                          <span class="settings-row-desc">Notify when a scan finishes</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Security alerts</span>
+                          <span class="settings-row-desc">Important security-related notifications</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Low disk space warnings</span>
+                          <span class="settings-row-desc">Alert when disk space is running low</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Update notifications</span>
+                          <span class="settings-row-desc">Notify when updates are available</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Sound effects</span>
+                          <span class="settings-row-desc">Play sounds for notifications</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox">
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Privacy & Data Section -->
+                  <div class="settings-section" id="settings-privacy">
+                    <div class="settings-section-header">
+                      <h2 class="settings-section-title">Privacy & Data</h2>
+                      <p class="settings-section-desc">Manage your data and privacy settings</p>
+                    </div>
+                    <div class="settings-card">
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Audit logging</span>
+                          <span class="settings-row-desc">Keep detailed logs of all cleaning operations</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Log retention</span>
+                          <span class="settings-row-desc">How long to keep audit logs</span>
+                        </div>
+                        <select class="settings-select">
+                          <option value="7">7 days</option>
+                          <option value="30" selected>30 days</option>
+                          <option value="90">90 days</option>
+                          <option value="365">1 year</option>
+                          <option value="0">Forever</option>
+                        </select>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Anonymous usage statistics</span>
+                          <span class="settings-row-desc">Help improve DeadBYTE by sharing anonymous data</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox">
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="settings-card">
+                      <div class="settings-card-header">
+                        <span class="settings-card-title">Data Management</span>
+                      </div>
+                      <div class="settings-actions-row">
+                        <button class="btn-ghost">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                          </svg>
+                          Export Logs
+                        </button>
+                        <button class="btn-ghost btn-danger">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                          </svg>
+                          Clear All Logs
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Advanced Section -->
+                  <div class="settings-section" id="settings-advanced">
+                    <div class="settings-section-header">
+                      <h2 class="settings-section-title">Advanced</h2>
+                      <p class="settings-section-desc">Expert settings - modify with caution</p>
+                    </div>
+                    <div class="settings-card">
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Debug mode</span>
+                          <span class="settings-row-desc">Enable detailed logging for troubleshooting</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox">
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Developer tools</span>
+                          <span class="settings-row-desc">Enable access to browser developer tools</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox">
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Hardware acceleration</span>
+                          <span class="settings-row-desc">Use GPU for rendering (may improve performance)</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                      <div class="settings-row">
+                        <div class="settings-row-info">
+                          <span class="settings-row-title">Safe delete mode</span>
+                          <span class="settings-row-desc">Move files to recycle bin instead of permanent delete</span>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" checked>
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="settings-card settings-card-danger">
+                      <div class="settings-card-header">
+                        <span class="settings-card-title">Danger Zone</span>
+                      </div>
+                      <div class="settings-actions-row">
+                        <button class="btn-ghost">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"/>
+                            <path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+                          </svg>
+                          Reset All Settings
+                        </button>
+                        <button class="btn-ghost btn-danger">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                          </svg>
+                          Clear All Data
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- About Section - Premium Credits Page -->
+                  <div class="settings-section" id="settings-about">
+                    <div class="about-page">
+                      <!-- Animated background grid -->
+                      <div class="about-bg-grid"></div>
+                      <div class="about-bg-glow"></div>
+
+                      <!-- App Branding Hero -->
+                      <div class="about-hero">
+                        <div class="about-logo-container">
+                          <div class="about-logo-ring"></div>
+                          <div class="about-logo-ring about-logo-ring-2"></div>
+                          <img src="assets/skull/skull.png" alt="DeadBYTE" class="about-logo-img">
+                        </div>
+                        <h1 class="about-app-name">
+                          <span class="about-app-name-dead">Dead</span><span class="about-app-name-byte">BYTE</span>
+                        </h1>
+                        <p class="about-app-tagline">System Domination Tool</p>
+                        <div class="about-version-row">
+                          <span class="about-version-badge">v1.0.0</span>
+                          <span class="about-version-divider"></span>
+                          <span class="about-version-channel">Stable Release</span>
+                        </div>
+                      </div>
+
+                      <!-- Developer Profile Card -->
+                      <div class="about-developer-card">
+                        <div class="about-developer-header">
+                          <div class="about-developer-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                              <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
+                              <circle cx="9" cy="7" r="4"/>
+                              <path d="M22 21v-2a4 4 0 00-3-3.87"/>
+                              <path d="M16 3.13a4 4 0 010 7.75"/>
+                            </svg>
+                          </div>
+                          <span class="about-developer-label">DEVELOPED BY</span>
+                        </div>
+                        <h2 class="about-developer-name">M. O. N. E. R</h2>
+                        <p class="about-developer-title">Software Engineer</p>
+                        <div class="about-developer-spec">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                          </svg>
+                          <span>Application Development & Artificial Intelligence</span>
+                        </div>
+                      </div>
+
+                      <!-- Quote Section -->
+                      <div class="about-quote-section">
+                        <div class="about-quote-mark">"</div>
+                        <blockquote class="about-quote-text">
+                          Passionate about crafting beautiful, intelligent applications that make everyday life simpler and more delightful.
+                        </blockquote>
+                        <div class="about-quote-author">— M. O. N. E. R</div>
+                      </div>
+
+                      <!-- Tech Stack -->
+                      <div class="about-tech-section">
+                        <div class="about-tech-label">BUILT WITH</div>
+                        <div class="about-tech-stack">
+                          <div class="about-tech-item">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                            <span>Electron</span>
+                          </div>
+                          <div class="about-tech-item">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                              <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+                            </svg>
+                            <span>HTML</span>
+                          </div>
+                          <div class="about-tech-item">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                              <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"/>
+                            </svg>
+                            <span>CSS</span>
+                          </div>
+                          <div class="about-tech-item">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                              <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+                            </svg>
+                            <span>JavaScript</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Action Buttons -->
+                      <div class="about-actions-row">
+                        <button class="about-action-btn">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"/>
+                            <polyline points="23 20 23 14 17 14"/>
+                            <path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+                          </svg>
+                          <span>Check for Updates</span>
+                        </button>
+                        <button class="about-action-btn about-action-btn-primary" id="btn-view-github">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+                          </svg>
+                          <span>View on GitHub</span>
+                        </button>
+                        <button class="about-action-btn" id="btn-contact-support">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                          </svg>
+                          <span>Contact Support</span>
+                        </button>
+                      </div>
+
+                      <!-- Footer / Copyright -->
+                      <div class="about-footer">
+                        <div class="about-footer-divider"></div>
+                        <p class="about-copyright">© 2026 M. O. N. E. R — All Rights Reserved.</p>
+                        <p class="about-footer-tagline">Crafted with precision and passion</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================
+             FILES MODULE - File Manager & System Control
+             ======================================== -->
+        <section class="module-page" id="page-files">
+          <!-- Redesigned Page Header with Action Toolbar -->
+          <header class="files-page-header">
+            <div class="files-header-left">
+              <h1 class="files-page-title">Files</h1>
+              <p class="files-page-subtitle">Advanced file management and system control</p>
+            </div>
+            <div class="files-header-right">
+              <div class="files-action-toolbar">
+                <button class="toolbar-btn" data-action="scan" title="Scan for Issues">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                  <span>Scan</span>
+                </button>
+                <button class="toolbar-btn" data-action="ownership" title="Take Ownership">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/>
+                  </svg>
+                  <span>Ownership</span>
+                </button>
+                <button class="toolbar-btn toolbar-btn-danger" data-action="forcedelete" title="Force Delete">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                  </svg>
+                  <span>Force Delete</span>
+                </button>
+                <button class="toolbar-btn" data-action="permissions" title="Edit Permissions">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                  </svg>
+                  <span>Permissions</span>
+                </button>
+                <button class="toolbar-btn" data-action="unlock" title="Unlock File">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 019.9-1"/>
+                  </svg>
+                  <span>Unlock</span>
+                </button>
+                <button class="toolbar-btn" data-action="logs" title="View Logs">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                  </svg>
+                  <span>Logs</span>
+                </button>
+              </div>
+              <div class="files-admin-badge">
+                <span class="admin-badge-dot"></span>
+                Admin Mode
+              </div>
+            </div>
+          </header>
+
+          <div class="module-body files-module">
+            <!-- ==========================================
+                 DRIVE SELECTOR BAR (Redesigned)
+                 ========================================== -->
+            <div class="drive-selector">
+              <!-- Drive C: -->
+              <div class="drive-card active" data-drive="C" data-usage="high">
+                <div class="drive-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M6 8h.01M6 12h.01M6 16h.01"/>
+                    <path d="M10 8h8M10 12h8M10 16h8"/>
+                  </svg>
+                </div>
+                <div class="drive-card-content">
+                  <div class="drive-card-header">
+                    <span class="drive-letter">C:</span>
+                    <span class="drive-label">System</span>
+                    <span class="drive-health drive-health-warning" title="85% used">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                      </svg>
+                    </span>
+                  </div>
+                  <div class="drive-usage-bar">
+                    <div class="drive-usage-fill drive-usage-high" style="width: 85%;"></div>
+                  </div>
+                  <div class="drive-space">
+                    <span class="drive-space-used">425 GB</span>
+                    <span class="drive-space-sep">/</span>
+                    <span class="drive-space-total">500 GB</span>
+                    <span class="drive-type-badge">NTFS</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Drive D: -->
+              <div class="drive-card" data-drive="D" data-usage="normal">
+                <div class="drive-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M6 8h.01M6 12h.01M6 16h.01"/>
+                    <path d="M10 8h8M10 12h8M10 16h8"/>
+                  </svg>
+                </div>
+                <div class="drive-card-content">
+                  <div class="drive-card-header">
+                    <span class="drive-letter">D:</span>
+                    <span class="drive-label">Data</span>
+                    <span class="drive-health drive-health-good" title="Healthy">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                    </span>
+                  </div>
+                  <div class="drive-usage-bar">
+                    <div class="drive-usage-fill drive-usage-normal" style="width: 39%;"></div>
+                  </div>
+                  <div class="drive-space">
+                    <span class="drive-space-used">234 GB</span>
+                    <span class="drive-space-sep">/</span>
+                    <span class="drive-space-total">600 GB</span>
+                    <span class="drive-type-badge">NTFS</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Drive E: -->
+              <div class="drive-card" data-drive="E" data-usage="normal">
+                <div class="drive-card-icon drive-card-icon-external">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    <path d="M9 9h6v6H9z"/>
+                    <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/>
+                  </svg>
+                </div>
+                <div class="drive-card-content">
+                  <div class="drive-card-header">
+                    <span class="drive-letter">E:</span>
+                    <span class="drive-label">USB External</span>
+                    <span class="drive-health drive-health-good" title="Healthy">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                    </span>
+                  </div>
+                  <div class="drive-usage-bar">
+                    <div class="drive-usage-fill drive-usage-normal" style="width: 56%;"></div>
+                  </div>
+                  <div class="drive-space">
+                    <span class="drive-space-used">18 GB</span>
+                    <span class="drive-space-sep">/</span>
+                    <span class="drive-space-total">32 GB</span>
+                    <span class="drive-type-badge">exFAT</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================================
+                 SEARCH/FILTER BAR
+                 ========================================== -->
+            <div class="files-search-bar">
+              <div class="search-input-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                <input type="text" class="search-input" id="files-search-input" placeholder="Search files by name, path, or status...">
+                <button class="search-clear-btn hidden" id="search-clear-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="locked">
+                  <span class="filter-dot filter-dot-locked"></span>
+                  Locked
+                </button>
+                <button class="filter-btn" data-filter="restricted">
+                  <span class="filter-dot filter-dot-restricted"></span>
+                  Restricted
+                </button>
+                <button class="filter-btn" data-filter="accessible">
+                  <span class="filter-dot filter-dot-accessible"></span>
+                  Accessible
+                </button>
+              </div>
+              <div class="files-count">
+                <span id="files-count-visible">12</span> of <span id="files-count-total">12</span> files
+              </div>
+            </div>
+
+            <!-- ==========================================
+                 MAIN CONTENT AREA
+                 ========================================== -->
+            <div class="files-content">
+              <!-- File Explorer Table (Redesigned) -->
+              <div class="files-main">
+                <div class="file-explorer">
+                  <!-- Breadcrumb Navigation Bar -->
+                  <div class="breadcrumb-bar">
+                    <button class="breadcrumb-back-btn" id="btn-go-back" title="Go up one level">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                      </svg>
+                    </button>
+                    <div class="breadcrumb-path" id="breadcrumb-path">
+                      <!-- Populated dynamically -->
+                    </div>
+                    <div class="breadcrumb-input-wrapper hidden" id="breadcrumb-input-wrapper">
+                      <input type="text" class="breadcrumb-input" id="breadcrumb-input" placeholder="Enter path...">
+                      <button class="breadcrumb-go-btn" id="breadcrumb-go-btn">Go</button>
+                    </div>
+                    <button class="breadcrumb-edit-btn" id="breadcrumb-edit-btn" title="Edit path">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="file-table-wrapper">
+                    <table class="file-table">
+                      <thead>
+                        <tr>
+                          <th class="col-checkbox"><input type="checkbox" class="file-checkbox" id="select-all-files"></th>
+                          <th class="col-name sortable" data-sort="name">
+                            <span>Name</span>
+                            <svg class="sort-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M12 5v14M5 12l7-7 7 7"/>
+                            </svg>
+                          </th>
+                          <th class="col-path">Path</th>
+                          <th class="col-size sortable" data-sort="size">
+                            <span>Size</span>
+                            <svg class="sort-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M12 5v14M5 12l7-7 7 7"/>
+                            </svg>
+                          </th>
+                          <th class="col-status sortable" data-sort="status">
+                            <span>Status</span>
+                            <svg class="sort-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M12 5v14M5 12l7-7 7 7"/>
+                            </svg>
+                          </th>
+                          <th class="col-owner">Owner</th>
+                          <th class="col-modified sortable" data-sort="modified">
+                            <span>Modified</span>
+                            <svg class="sort-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M12 5v14M5 12l7-7 7 7"/>
+                            </svg>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="file-table-body">
+                        <!-- Locked by System -->
+                        <tr data-file-id="1" data-status="locked">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-system">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                  <path d="M7 11V7a5 5 0 0110 0v4"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">pagefile.sys</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">C:\Windows\</code></td>
+                          <td class="col-size"><span class="file-size">8.00 GB</span></td>
+                          <td class="col-status"><span class="file-status file-status-locked">LOCKED</span></td>
+                          <td class="col-owner"><span class="file-owner">SYSTEM</span></td>
+                          <td class="col-modified"><span class="file-modified">—</span></td>
+                        </tr>
+                        <tr data-file-id="2" data-status="locked">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-system">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                  <path d="M7 11V7a5 5 0 0110 0v4"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">hiberfil.sys</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">C:\Windows\</code></td>
+                          <td class="col-size"><span class="file-size">3.20 GB</span></td>
+                          <td class="col-status"><span class="file-status file-status-locked">LOCKED</span></td>
+                          <td class="col-owner"><span class="file-owner">SYSTEM</span></td>
+                          <td class="col-modified"><span class="file-modified">—</span></td>
+                        </tr>
+                        <tr data-file-id="3" data-status="locked">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-exe">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <circle cx="12" cy="12" r="10"/>
+                                  <polygon points="10 8 16 12 10 16 10 8"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">ntoskrnl.exe</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">C:\Windows\System32\</code></td>
+                          <td class="col-size"><span class="file-size">11.4 MB</span></td>
+                          <td class="col-status"><span class="file-status file-status-locked">LOCKED</span></td>
+                          <td class="col-owner"><span class="file-owner">TrustedInstaller</span></td>
+                          <td class="col-modified"><span class="file-modified">—</span></td>
+                        </tr>
+
+                        <!-- Permission Restricted -->
+                        <tr data-file-id="4" data-status="restricted">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-config">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <circle cx="12" cy="12" r="3"/>
+                                  <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">SAM</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">C:\Windows\System32\config\</code></td>
+                          <td class="col-size"><span class="file-size">256 KB</span></td>
+                          <td class="col-status"><span class="file-status file-status-restricted">RESTRICTED</span></td>
+                          <td class="col-owner"><span class="file-owner">SYSTEM</span></td>
+                          <td class="col-modified"><span class="file-modified">—</span></td>
+                        </tr>
+                        <tr data-file-id="5" data-status="restricted">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-config">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <circle cx="12" cy="12" r="3"/>
+                                  <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">SYSTEM</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">C:\Windows\System32\config\</code></td>
+                          <td class="col-size"><span class="file-size">18.4 MB</span></td>
+                          <td class="col-status"><span class="file-status file-status-restricted">RESTRICTED</span></td>
+                          <td class="col-owner"><span class="file-owner">SYSTEM</span></td>
+                          <td class="col-modified"><span class="file-modified">—</span></td>
+                        </tr>
+                        <tr data-file-id="6" data-status="restricted">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-config">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                  <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">AppData.config</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">C:\Users\Admin\AppData\</code></td>
+                          <td class="col-size"><span class="file-size">44 KB</span></td>
+                          <td class="col-status"><span class="file-status file-status-restricted">RESTRICTED</span></td>
+                          <td class="col-owner"><span class="file-owner">Admin</span></td>
+                          <td class="col-modified"><span class="file-modified">3 days ago</span></td>
+                        </tr>
+
+                        <!-- Locked by Process -->
+                        <tr data-file-id="7" data-status="system" data-locked-by="chrome.exe" data-pid="4821">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-data">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                                </svg>
+                              </span>
+                              <div class="file-name-wrapper">
+                                <span class="file-name">chrome_cache.db</span>
+                                <span class="file-lock-badge">
+                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                  chrome.exe
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">C:\Users\Admin\AppData\Chrome\</code></td>
+                          <td class="col-size"><span class="file-size">128 MB</span></td>
+                          <td class="col-status"><span class="file-status file-status-system">IN USE</span></td>
+                          <td class="col-owner"><span class="file-owner">Admin</span></td>
+                          <td class="col-modified"><span class="file-modified">2 hrs ago</span></td>
+                        </tr>
+                        <tr data-file-id="8" data-status="system" data-locked-by="node.exe" data-pid="7734">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-log">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                  <polyline points="14 2 14 8 20 8"/>
+                                  <line x1="16" y1="13" x2="8" y2="13"/>
+                                  <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                              </span>
+                              <div class="file-name-wrapper">
+                                <span class="file-name">node_modules.log</span>
+                                <span class="file-lock-badge">
+                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                  node.exe
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">D:\Projects\app\</code></td>
+                          <td class="col-size"><span class="file-size">2.3 MB</span></td>
+                          <td class="col-status"><span class="file-status file-status-system">IN USE</span></td>
+                          <td class="col-owner"><span class="file-owner">Admin</span></td>
+                          <td class="col-modified"><span class="file-modified">1 hr ago</span></td>
+                        </tr>
+                        <tr data-file-id="9" data-status="system" data-locked-by="code.exe" data-pid="3391">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-log">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                  <polyline points="14 2 14 8 20 8"/>
+                                  <line x1="16" y1="13" x2="8" y2="13"/>
+                                  <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                              </span>
+                              <div class="file-name-wrapper">
+                                <span class="file-name">output.log</span>
+                                <span class="file-lock-badge">
+                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                  code.exe
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">D:\Projects\app\</code></td>
+                          <td class="col-size"><span class="file-size">890 KB</span></td>
+                          <td class="col-status"><span class="file-status file-status-system">IN USE</span></td>
+                          <td class="col-owner"><span class="file-owner">Admin</span></td>
+                          <td class="col-modified"><span class="file-modified">5 min ago</span></td>
+                        </tr>
+
+                        <!-- Accessible -->
+                        <tr data-file-id="10" data-status="accessible">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-pdf">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                  <polyline points="14 2 14 8 20 8"/>
+                                  <path d="M10 12h4M10 16h4M8 12h.01M8 16h.01"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">report_final.pdf</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">D:\Documents\</code></td>
+                          <td class="col-size"><span class="file-size">4.2 MB</span></td>
+                          <td class="col-status"><span class="file-status file-status-accessible">ACCESSIBLE</span></td>
+                          <td class="col-owner"><span class="file-owner">Admin</span></td>
+                          <td class="col-modified"><span class="file-modified">Yesterday</span></td>
+                        </tr>
+                        <tr data-file-id="11" data-status="accessible">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-archive">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">backup_old.zip</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">E:\Backup\</code></td>
+                          <td class="col-size"><span class="file-size">2.1 GB</span></td>
+                          <td class="col-status"><span class="file-status file-status-accessible">ACCESSIBLE</span></td>
+                          <td class="col-owner"><span class="file-owner">Admin</span></td>
+                          <td class="col-modified"><span class="file-modified">1 week ago</span></td>
+                        </tr>
+                        <tr data-file-id="12" data-status="accessible">
+                          <td class="col-checkbox"><input type="checkbox" class="file-checkbox"></td>
+                          <td class="col-name">
+                            <div class="file-name-cell">
+                              <span class="file-type-icon file-type-exe">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                  <circle cx="12" cy="12" r="10"/>
+                                  <polygon points="10 8 16 12 10 16 10 8"/>
+                                </svg>
+                              </span>
+                              <span class="file-name">install_temp.exe</span>
+                            </div>
+                          </td>
+                          <td class="col-path"><code class="file-path">C:\Temp\</code></td>
+                          <td class="col-size"><span class="file-size">67 MB</span></td>
+                          <td class="col-status"><span class="file-status file-status-accessible">ACCESSIBLE</span></td>
+                          <td class="col-owner"><span class="file-owner">Admin</span></td>
+                          <td class="col-modified"><span class="file-modified">Today</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Details Panel (Redesigned with Empty State) -->
+              <div class="details-panel" id="details-panel">
+                <!-- Empty State (shown when no file selected) -->
+                <div class="details-empty-state" id="details-empty-state">
+                  <div class="details-empty-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/>
+                      <polyline points="13 2 13 9 20 9"/>
+                    </svg>
+                  </div>
+                  <p class="details-empty-title">No file selected</p>
+                  <p class="details-empty-text">Select a file from the table to view details and available actions</p>
+                </div>
+
+                <!-- File Details (hidden until file selected) -->
+                <div class="details-content hidden" id="details-content">
+                  <div class="details-panel-header">
+                    <div class="details-file-icon" id="details-file-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                      </svg>
+                    </div>
+                    <div class="details-file-info">
+                      <div class="details-file-name" id="details-file-name">filename.ext</div>
+                      <div class="details-file-path-row">
+                        <code id="details-file-path">C:\path\to\file</code>
+                        <button class="details-copy-btn" title="Copy path">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="details-panel-body">
+                    <!-- Info Section -->
+                    <div class="details-section">
+                      <div class="details-section-title">File Information</div>
+                      <div class="details-info-grid">
+                        <div class="details-info-item">
+                          <span class="details-info-label">Owner</span>
+                          <span class="details-info-value" id="details-owner">—</span>
+                        </div>
+                        <div class="details-info-item">
+                          <span class="details-info-label">Size</span>
+                          <span class="details-info-value" id="details-size">—</span>
+                        </div>
+                        <div class="details-info-item">
+                          <span class="details-info-label">Modified</span>
+                          <span class="details-info-value" id="details-modified">—</span>
+                        </div>
+                        <div class="details-info-item">
+                          <span class="details-info-label">Filesystem</span>
+                          <span class="details-info-value" id="details-fs">NTFS</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Permission Matrix -->
+                    <div class="details-section">
+                      <div class="details-section-title">Permission Matrix</div>
+                      <div class="permission-matrix">
+                        <div class="permission-matrix-header"></div>
+                        <div class="permission-matrix-header">READ</div>
+                        <div class="permission-matrix-header">WRITE</div>
+                        <div class="permission-matrix-header">EXEC</div>
+
+                        <div class="permission-matrix-row-label">Owner</div>
+                        <div class="permission-toggle"><span class="permission-indicator on" data-perm="owner-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                        <div class="permission-toggle"><span class="permission-indicator on" data-perm="owner-w"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                        <div class="permission-toggle"><span class="permission-indicator off" data-perm="owner-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>
+
+                        <div class="permission-matrix-row-label">Group</div>
+                        <div class="permission-toggle"><span class="permission-indicator on" data-perm="group-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                        <div class="permission-toggle"><span class="permission-indicator off" data-perm="group-w"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>
+                        <div class="permission-toggle"><span class="permission-indicator off" data-perm="group-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>
+
+                        <div class="permission-matrix-row-label">Others</div>
+                        <div class="permission-toggle"><span class="permission-indicator off" data-perm="others-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>
+                        <div class="permission-toggle"><span class="permission-indicator off" data-perm="others-w"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>
+                        <div class="permission-toggle"><span class="permission-indicator off" data-perm="others-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>
+
+                        <div class="permission-matrix-row-label">System</div>
+                        <div class="permission-toggle"><span class="permission-indicator on" data-perm="system-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                        <div class="permission-toggle"><span class="permission-indicator on" data-perm="system-w"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                        <div class="permission-toggle"><span class="permission-indicator on" data-perm="system-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                      </div>
+                    </div>
+
+                    <!-- Locking Process Section (hidden by default) -->
+                    <div class="details-section" id="details-lock-section" style="display: none;">
+                      <div class="details-section-title">Locking Process</div>
+                      <div class="lock-process-info">
+                        <div class="lock-process-header">
+                          <div class="lock-process-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                              <line x1="8" y1="21" x2="16" y2="21"/>
+                              <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                          </div>
+                          <span class="lock-process-name" id="lock-process-name">chrome.exe</span>
+                          <span class="lock-process-pid" id="lock-process-pid">PID 4821</span>
+                        </div>
+                        <div class="lock-process-status">Actively holding file handle</div>
+                        <button class="btn btn-sm btn-danger" id="btn-kill-process">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                          </svg>
+                          Kill Process
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="details-panel-actions">
+                    <button class="details-action-btn details-action-btn-danger" id="btn-force-delete">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                      </svg>
+                      Force Delete
+                    </button>
+                    <button class="details-action-btn details-action-btn-primary" id="btn-take-ownership">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/>
+                      </svg>
+                      Take Ownership
+                    </button>
+                    <button class="details-action-btn details-action-btn-warning" id="btn-fix-permissions">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0110 0v4"/>
+                      </svg>
+                      Fix Permissions
+                    </button>
+                    <button class="details-action-btn details-action-btn-success" id="btn-unlock-file">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 019.9-1"/>
+                      </svg>
+                      Unlock File
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ============================================
+         CONTEXT MENU
+         ============================================ -->
+    <div class="context-menu" id="context-menu">
+      <div class="context-menu-item" data-action="ownership">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/>
+        </svg>
+        <span>Take Ownership</span>
+      </div>
+      <div class="context-menu-item" data-action="permissions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0110 0v4"/>
+        </svg>
+        <span>Change Permissions</span>
+      </div>
+      <div class="context-menu-divider"></div>
+      <div class="context-menu-item context-menu-item-danger" data-action="forcedelete">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6"/>
+          <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+        </svg>
+        <span>Force Delete</span>
+      </div>
+      <div class="context-menu-item" data-action="findprocess">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <span>Find Locking Process</span>
+      </div>
+      <div class="context-menu-divider"></div>
+      <div class="context-menu-item" data-action="copypath">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+        </svg>
+        <span>Copy Path</span>
+      </div>
+    </div>
+
+    <!-- ============================================
+         MODAL: FORCE DELETE CONFIRMATION
+         ============================================ -->
+    <div class="modal-overlay" id="modal-force-delete">
+      <div class="modal-content modal-force-delete">
+        <button class="modal-close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+
+        <div class="modal-warning-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+
+        <div class="modal-danger-header">IRREVERSIBLE ACTION</div>
+
+        <div class="modal-file-summary">
+          <div class="modal-file-summary-item">
+            <span class="modal-file-summary-label">File</span>
+            <span class="modal-file-summary-value" id="modal-delete-filename">pagefile.sys</span>
+          </div>
+          <div class="modal-file-summary-item">
+            <span class="modal-file-summary-label">Path</span>
+            <span class="modal-file-summary-value" id="modal-delete-path">C:\Windows\</span>
+          </div>
+          <div class="modal-file-summary-item">
+            <span class="modal-file-summary-label">Size</span>
+            <span class="modal-file-summary-value" id="modal-delete-size">8.00 GB</span>
+          </div>
+        </div>
+
+        <p class="modal-warning-text">This file will be permanently deleted. This action cannot be undone.</p>
+
+        <div class="modal-checkbox-group">
+          <label class="modal-checkbox-item">
+            <input type="checkbox" id="delete-recursive">
+            <span>Recursively delete locked subfiles and folders</span>
+          </label>
+          <label class="modal-checkbox-item">
+            <input type="checkbox" id="delete-terminate">
+            <span>Terminate locking processes automatically</span>
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="btn-cancel-delete">Cancel</button>
+          <button class="btn btn-danger btn-countdown" id="btn-confirm-delete" disabled>Wait (3)...</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         MODAL: PERMISSION EDITOR
+         ============================================ -->
+    <div class="modal-overlay" id="modal-permission-editor">
+      <div class="modal-content modal-permission-editor">
+        <button class="modal-close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+
+        <h2 class="modal-title">Edit File Permissions</h2>
+        <div class="permission-editor-path" id="permission-editor-path">C:\Windows\pagefile.sys</div>
+
+        <table class="permission-editor-table" id="permission-editor-table">
+          <thead>
+            <tr>
+              <th>User/Group</th>
+              <th>Type</th>
+              <th>Permissions</th>
+              <th>Inherited</th>
+            </tr>
+          </thead>
+          <tbody id="permission-editor-tbody">
+            <!-- Populated dynamically from real ACL data -->
+          </tbody>
+        </table>
+
+        <div class="permission-quick-actions">
+          <span class="quick-action-label">Quick Actions:</span>
+          <button class="btn btn-sm btn-secondary" id="btn-grant-full-control">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Grant Full Control
+          </button>
+          <button class="btn btn-sm btn-secondary" id="btn-make-readable">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            Make Readable
+          </button>
+        </div>
+
+        <div class="permission-editor-options">
+          <label class="permission-editor-option">
+            <input type="checkbox" id="perm-apply-subfolders">
+            <span>Apply to all subfolders and files</span>
+          </label>
+          <label class="permission-editor-option">
+            <input type="checkbox" id="perm-replace-child">
+            <span>Replace all child object permissions</span>
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="btn-reset-permissions">Reset to Default</button>
+          <button class="btn btn-ghost" id="btn-cancel-permissions">Cancel</button>
+          <button class="btn btn-primary" id="btn-save-permissions">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         MODAL: PROCESS LOCKER
+         ============================================ -->
+    <div class="modal-overlay" id="modal-process-locker">
+      <div class="modal-content modal-process-locker">
+        <button class="modal-close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+
+        <h2 class="modal-title">Processes Locking This File</h2>
+        <div class="permission-editor-path" id="locker-filename"></div>
+
+        <div class="process-list" id="locker-process-list">
+          <!-- Dynamically populated by populateProcessLocker() -->
+        </div>
+
+        <div class="process-warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <span class="process-warning-text">Killing this process may cause unsaved data loss</span>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="btn-cancel-process">Cancel</button>
+          <button class="btn btn-warning" id="btn-kill-all-unlock">Kill All & Unlock</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         UPDATE AVAILABLE MODAL
+         ============================================ -->
+    <div class="modal-overlay" id="modal-update-available">
+      <div class="modal modal-update">
+        <div class="modal-update-header">
+          <div class="modal-update-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </div>
+          <h2 class="modal-update-title">Update Available</h2>
+          <button class="modal-close-btn" id="update-modal-close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-update-content">
+          <div class="update-version-compare">
+            <div class="update-version-item update-version-current">
+              <span class="update-version-label">Current Version</span>
+              <span class="update-version-number" id="update-current-version">v1.0.0</span>
+            </div>
+            <div class="update-version-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </div>
+            <div class="update-version-item update-version-new">
+              <span class="update-version-label">
+                New Version
+                <span class="update-new-badge">NEW</span>
+              </span>
+              <span class="update-version-number update-version-highlight" id="update-latest-version">v1.1.0</span>
+              <span class="update-pulse-dot"></span>
+            </div>
+          </div>
+
+          <div class="update-release-date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Released: <strong id="update-release-date">March 25, 2026</strong></span>
+          </div>
+
+          <div class="update-release-notes">
+            <h4 class="update-notes-title">What's New</h4>
+            <div class="update-notes-content" id="update-release-notes">
+              Loading release notes...
+            </div>
+          </div>
+
+          <!-- Download Progress Section (hidden by default) -->
+          <div class="update-download-section hidden" id="update-download-section">
+            <div class="update-download-header">
+              <span class="update-download-title">Downloading Update...</span>
+              <span class="update-download-size" id="update-download-size">0 MB / 0 MB</span>
+            </div>
+            <div class="update-progress-bar">
+              <div class="update-progress-fill" id="update-progress-fill"></div>
+            </div>
+            <div class="update-download-footer">
+              <span class="update-download-percent" id="update-download-percent">0%</span>
+              <span class="update-download-status" id="update-download-status">Starting download...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-update-footer" id="update-modal-footer">
+          <!-- Info State Buttons -->
+          <div class="update-footer-info" id="update-footer-info">
+            <button class="btn-ghost" id="update-later-btn">Later</button>
+            <button class="btn-update-download" id="update-download-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download Update
+            </button>
+          </div>
+
+          <!-- Downloading State Buttons -->
+          <div class="update-footer-downloading hidden" id="update-footer-downloading">
+            <button class="btn-ghost btn-cancel-download" id="update-cancel-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              Cancel
+            </button>
+          </div>
+
+          <!-- Ready State Buttons -->
+          <div class="update-footer-ready hidden" id="update-footer-ready">
+            <button class="btn-ghost" id="update-install-later-btn">Install Later</button>
+            <button class="btn-update-install" id="update-install-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              Install Now
+            </button>
+          </div>
+
+          <!-- Error State Buttons -->
+          <div class="update-footer-error hidden" id="update-footer-error">
+            <button class="btn-ghost" id="update-error-close-btn">Close</button>
+            <button class="btn-update-download" id="update-retry-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <polyline points="1 4 1 10 7 10"/>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+              </svg>
+              Retry Download
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         SPLASH SCREEN
+         ============================================ -->
+    <div class="splash-screen" id="splash-screen">
+      <div class="splash-scanline"></div>
+      <div class="splash-logo">Dead<span>BYTE</span></div>
+      <div class="splash-text">
+        <div class="splash-text-line">Initializing DeadBYTE...</div>
+        <div class="splash-text-line">Loading system modules... <span class="splash-text-ok">[OK]</span></div>
+        <div class="splash-text-line">Checking admin privileges... <span class="splash-text-ok">[OK]</span></div>
+        <div class="splash-text-line">Scanning drive structure... <span class="splash-text-ok">[OK]</span></div>
+        <div class="splash-text-line">Ready.</div>
+      </div>
+      <div class="splash-skip" id="splash-skip">[SKIP]</div>
+    </div>
+
+    <!-- ============================================
+         STATUS BAR
+         ============================================ -->
+    <footer class="status-bar">
+      <div class="status-bar-left">
+        <div class="status-item">
+          <span class="status-indicator"></span>
+          <span>System Healthy</span>
+        </div>
+        <span class="status-divider"></span>
+        <span>Last Scan: 2 hours ago</span>
+      </div>
+      <div class="status-bar-files" id="status-bar-files">
+        <span class="status-selected"><span class="status-selected-count" id="selected-count">0</span> files selected</span>
+        <span class="status-admin">
+          <span class="status-admin-dot"></span>
+          ADMIN MODE
+        </span>
+        <span class="status-drive">
+          <span class="status-drive-letter" id="current-drive">C:\</span>
+          Active
+        </span>
+        <span class="status-clock" id="status-clock">00:00:00</span>
+      </div>
+      <div class="status-bar-right">
+        <span>DeadBYTE v1.0.0</span>
+      </div>
+    </footer>
+
+    <!-- Overlay Effects -->
+    <div class="scanline-overlay"></div>
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="main.js"></script>
+
+  <!-- SPLASH SCREEN FAILSAFE - Inline for maximum reliability -->
+  <script>
+    (function() {
+      function killSplash() {
+        var s = document.getElementById('splash-screen');
+        if (s) {
+          s.style.display = 'none';
+          s.style.opacity = '0';
+          s.style.visibility = 'hidden';
+          s.remove && s.remove();
+        }
+      }
+      // Kill after 3 seconds no matter what
+      setTimeout(killSplash, 3000);
+      // Kill after 4 seconds backup
+      setTimeout(killSplash, 4000);
+      // Skip button
+      var skip = document.getElementById('splash-skip');
+      if (skip) skip.onclick = killSplash;
+      document.addEventListener('DOMContentLoaded', function() {
+        var skip2 = document.getElementById('splash-skip');
+        if (skip2) skip2.onclick = killSplash;
+        setTimeout(killSplash, 2500);
+      });
+    })();
+  </script>
+
+  <!-- GIF Switcher - Inline for reliability -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all indicator buttons
+      const indicators = document.querySelectorAll('.gif-indicator');
+      const images = document.querySelectorAll('.gif-image');
+
+      // Add click handler to each indicator
+      indicators.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const targetIndex = this.getAttribute('data-target');
+
+          // Remove active from all indicators and images
+          indicators.forEach(function(i) { i.classList.remove('active'); });
+          images.forEach(function(img) {
+            img.classList.remove('active');
+            img.classList.remove('fading-out');
+          });
+
+          // Add active to clicked indicator
+          this.classList.add('active');
+
+          // Add active to matching image
+          const targetImage = document.querySelector('.gif-image[data-index="' + targetIndex + '"]');
+          if (targetImage) {
+            targetImage.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

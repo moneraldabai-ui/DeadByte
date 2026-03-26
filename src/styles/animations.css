@@ -1,0 +1,589 @@
+/**
+ * DeadBYTE Animation System
+ * =========================
+ * All keyframe animations for skull states and UI elements.
+ */
+
+/* ============================================
+   SKULL ANIMATIONS - IDLE STATE
+   ============================================ */
+
+/* Breathing motion - subtle scale oscillation */
+@keyframes skull-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Eye glow pulse - idle */
+@keyframes eye-pulse-idle {
+  0%, 100% {
+    opacity: 0.4;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.6;
+    filter: blur(1px);
+  }
+}
+
+/* Crossbones gentle sway */
+@keyframes bones-sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+}
+
+/* Ambient glow pulse */
+@keyframes ambient-pulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.02);
+  }
+}
+
+/* ============================================
+   SKULL ANIMATIONS - SCANNING STATE
+   ============================================ */
+
+/* Eye glow intense pulse */
+@keyframes eye-pulse-scanning {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Eye ring expansion */
+@keyframes eye-ring-expand {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* Crossbones continuous rotation */
+@keyframes bones-rotate-scanning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scan line sweep */
+@keyframes scanline-sweep {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Data particle flow */
+@keyframes particle-flow-in {
+  0% {
+    transform: translateX(var(--particle-start-x, 100px)) translateY(var(--particle-start-y, 0));
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   SKULL ANIMATIONS - DELETING STATE
+   ============================================ */
+
+/* Jaw bite/chomp */
+@keyframes jaw-bite {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(8px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+}
+
+/* Jaw grinding (horizontal) */
+@keyframes jaw-grind {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+/* Delete flash */
+@keyframes delete-flash {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Particle burst from mouth */
+@keyframes particle-burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--burst-x, 20px), var(--burst-y, 50px)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Aggressive eye flash */
+@keyframes eye-flash-delete {
+  0%, 40%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  20%, 60% {
+    opacity: 0.5;
+    filter: brightness(2);
+  }
+}
+
+/* ============================================
+   SKULL ANIMATIONS - ERROR STATE
+   ============================================ */
+
+/* Glitch displacement */
+@keyframes skull-glitch {
+  0%, 100% {
+    transform: translateX(0);
+    filter: none;
+  }
+  10% {
+    transform: translateX(-5px);
+  }
+  20% {
+    transform: translateX(8px);
+  }
+  30% {
+    transform: translateX(-3px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(0);
+  }
+}
+
+/* RGB split effect */
+@keyframes rgb-split {
+  0%, 100% {
+    text-shadow: none;
+    filter: none;
+  }
+  25% {
+    filter: drop-shadow(-2px 0 #ff0000) drop-shadow(2px 0 #00ffff);
+  }
+  50% {
+    filter: drop-shadow(2px 0 #ff0000) drop-shadow(-2px 0 #00ffff);
+  }
+  75% {
+    filter: drop-shadow(-1px 0 #ff0000) drop-shadow(1px 0 #00ffff);
+  }
+}
+
+/* Shake */
+@keyframes skull-shake {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px) translateY(1px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px) translateY(-1px);
+  }
+}
+
+/* Eye flicker (error) */
+@keyframes eye-flicker-error {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    opacity: 1;
+  }
+  10%, 30%, 50%, 70%, 90% {
+    opacity: 0.2;
+  }
+}
+
+/* Red tint flash */
+@keyframes error-tint {
+  0%, 100% {
+    filter: none;
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(255, 51, 102, 0.5)) brightness(1.1);
+  }
+}
+
+/* ============================================
+   SKULL ANIMATIONS - SUCCESS STATE
+   ============================================ */
+
+/* Happy eye squint */
+@keyframes eye-happy {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.3);
+    opacity: 0.8;
+  }
+}
+
+/* Glow burst expand */
+@keyframes glow-burst {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Bones proud scale */
+@keyframes bones-proud {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Satisfied pulse */
+@keyframes success-pulse {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.3) drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+  }
+}
+
+/* ============================================
+   UI ELEMENT ANIMATIONS
+   ============================================ */
+
+/* Button hover glow */
+@keyframes button-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--accent-current, rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    box-shadow: 0 0 20px var(--accent-current, rgba(255, 255, 255, 0.4));
+  }
+}
+
+/* Card entry */
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade out */
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Slide in from left */
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Slide in from right */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Scale in (modal) */
+@keyframes scale-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Scale out (modal) */
+@keyframes scale-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+/* Progress bar fill */
+@keyframes progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-value, 100%);
+  }
+}
+
+/* Progress bar glow pulse */
+@keyframes progress-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 15px currentColor, 0 0 25px currentColor;
+  }
+}
+
+/* Spinner rotation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Checkbox check draw */
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* List item highlight slide */
+@keyframes highlight-slide {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Toast enter */
+@keyframes toast-enter {
+  from {
+    transform: translateY(100%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Pulse ring (notifications) */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   BACKGROUND EFFECTS
+   ============================================ */
+
+/* Scanline overlay movement */
+@keyframes scanlines-move {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 4px;
+  }
+}
+
+/* Noise flicker */
+@keyframes noise-flicker {
+  0%, 100% {
+    opacity: 0.02;
+  }
+  50% {
+    opacity: 0.04;
+  }
+}
+
+/* Ambient particle float */
+@keyframes particle-float {
+  0% {
+    transform: translateY(100%) translateX(var(--float-offset, 0));
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-20%) translateX(calc(var(--float-offset, 0) * -1));
+    opacity: 0;
+  }
+}
+
+/* Grid pulse */
+@keyframes grid-pulse {
+  0%, 100% {
+    opacity: 0.03;
+  }
+  50% {
+    opacity: 0.06;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.animate-breathe {
+  animation: skull-breathe 4s ease-in-out infinite;
+}
+
+.animate-pulse-idle {
+  animation: eye-pulse-idle 3s ease-in-out infinite;
+}
+
+.animate-sway {
+  animation: bones-sway 8s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in var(--duration-normal) var(--ease-out) forwards;
+}
+
+.animate-card-enter {
+  animation: card-enter var(--duration-normal) var(--ease-out) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in var(--duration-normal) var(--ease-out) forwards;
+}
+
+/* Stagger delays for list items */
+.stagger-1 { animation-delay: 50ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 150ms; }
+.stagger-4 { animation-delay: 200ms; }
+.stagger-5 { animation-delay: 250ms; }
+.stagger-6 { animation-delay: 300ms; }
+.stagger-7 { animation-delay: 350ms; }
+.stagger-8 { animation-delay: 400ms; }
