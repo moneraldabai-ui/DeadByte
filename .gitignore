@@ -137,3 +137,22 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Electron build output
+  release/
+  *.exe
+  *.msi
+  *.dmg
+  *.AppImage
+  *.snap
+  *.deb
+  *.rpm
+  *.blockmap
+
+# Electron-builder
+  electron-builder.env
+
+# OS files
+  .DS_Store
+  Thumbs.db
+  Desktop.ini
