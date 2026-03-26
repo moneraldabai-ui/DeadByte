@@ -194,8 +194,7 @@ Contributions are welcome! Here's how you can help:
 5. **Open** a Pull Request
 
 ### Ideas for Contribution
-- [ ] Dark/Light theme toggle
-- [ ] Multi-language support
+- [ ] Dark theme 
 - [ ] Registry cleaner
 - [ ] Duplicate file finder
 - [ ] Disk defragmentation
