@@ -547,10 +547,10 @@ ipcMain.handle('updates:check', async () => {
           const releaseNotes = release.body || 'No release notes available.';
           const publishedAt = release.published_at ? new Date(release.published_at).toLocaleDateString() : '';
 
-          // Extract Windows installer from assets
+          // Extract Windows installer from assets (prefer installer over portable)
           const windowsAsset = release.assets?.find(a =>
-            a.name.endsWith('.exe') || a.name.endsWith('.msi')
-          );
+            (a.name.endsWith('.exe') && a.name.includes('win-x64')) || a.name.endsWith('.msi')
+          ) || release.assets?.find(a => a.name.endsWith('.exe'));
 
           // Compare versions
           const isUpToDate = compareVersions(currentVersion, latestVersion) >= 0;
@@ -778,10 +778,10 @@ async function checkForUpdatesOnStartup() {
 
           // Check if update is available
           if (compareVersions(currentVersion, latestVersion) < 0) {
-            // Extract Windows installer from assets
+            // Extract Windows installer from assets (prefer installer over portable)
             const windowsAsset = release.assets?.find(a =>
-              a.name.endsWith('.exe') || a.name.endsWith('.msi')
-            );
+              (a.name.endsWith('.exe') && a.name.includes('win-x64')) || a.name.endsWith('.msi')
+            ) || release.assets?.find(a => a.name.endsWith('.exe'));
 
             // Send update available event to renderer
             if (mainWindow && !mainWindow.isDestroyed()) {
