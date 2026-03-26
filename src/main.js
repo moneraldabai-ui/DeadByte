@@ -5563,7 +5563,7 @@ class SettingsController {
       // Fallback to opening browser if no direct download URL
       const releaseUrl = this.releaseUrl || pendingUpdateInfo?.releaseUrl;
       if (releaseUrl) {
-        window.open(releaseUrl, '_blank');
+        window.deadbyte.shell.openExternal(releaseUrl);
         this.closeUpdateModal();
         window.DeadBYTE?.toast?.info('Opening Browser', 'Download page opened in your default browser');
       }

@@ -4,27 +4,104 @@
   "description": "DeadBYTE - Advanced File Management and System Control",
   "main": "electron.js",
   "scripts": {
-    "start": "node node_modules/electron/cli.js .",
-    "dev": "node node_modules/electron/cli.js . --enable-logging"
+    "start": ".\\node_modules\\.bin\\electron .",
+    "dev": ".\\node_modules\\.bin\\electron . --enable-logging",
+    "build": "electron-builder --win",
+    "build:dir": "electron-builder --win --dir",
+    "build:portable": "electron-builder --win portable",
+    "build:nsis": "electron-builder --win nsis",
+    "build:all": "electron-builder --win portable nsis"
   },
-  "author": "DeadBYTE Team",
+  "author": {
+    "name": "M. O. N. E. R",
+    "email": "moner.aldabai@gmail.com"
+  },
   "license": "MIT",
-  "dependencies": {
-    "electron": "^28.0.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moneraldabai-ui/DeadByte"
   },
+  "homepage": "https://github.com/moneraldabai-ui/DeadByte",
+  "bugs": {
+    "url": "https://github.com/moneraldabai-ui/DeadByte/issues"
+  },
+  "keywords": [
+    "file-manager",
+    "system-utility",
+    "windows",
+    "electron",
+    "force-delete",
+    "system-maintenance"
+  ],
   "devDependencies": {
+    "electron": "^28.0.0",
     "electron-builder": "^24.9.1"
   },
   "build": {
-    "appId": "com.deadbyte.app",
+    "appId": "com.moner.deadbyte",
     "productName": "DeadBYTE",
+    "copyright": "Copyright 2026 M. O. N. E. R",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "build"
     },
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+      "!docs/**/*",
+      "!installer/**/*",
+      "!*.md",
+      "!*.bat"
+    ],
+    "extraResources": [
+      {
+        "from": "src/assets",
+        "to": "assets",
+        "filter": ["**/*"]
+      }
+    ],
     "win": {
-      "target": "nsis",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
       "icon": "src/assets/skull/skull.ico",
-      "requestedExecutionLevel": "requireAdministrator"
+      "requestedExecutionLevel": "requireAdministrator",
+      "publisherName": "M. O. N. E. R"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "installerIcon": "src/assets/skull/skull.ico",
+      "uninstallerIcon": "src/assets/skull/skull.ico",
+      "installerHeaderIcon": "src/assets/skull/skull.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DeadBYTE",
+      "include": "installer/nsis-include.nsh",
+      "license": "LICENSE"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-Portable.${ext}"
     }
   }
 }

@@ -9,6 +9,9 @@ const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+// Disable sandbox to prevent crashes when running as Administrator
+app.commandLine.appendSwitch('no-sandbox');
+
 // Import backend services
 const driveService = require('./backend/driveService');
 const fileService = require('./backend/fileService');
