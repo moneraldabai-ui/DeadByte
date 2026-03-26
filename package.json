@@ -83,8 +83,7 @@
         }
       ],
       "icon": "src/assets/skull/skull.ico",
-      "requestedExecutionLevel": "requireAdministrator",
-      "publisherName": "M. O. N. E. R"
+      "requestedExecutionLevel": "requireAdministrator"
     },
     "nsis": {
       "oneClick": false,
