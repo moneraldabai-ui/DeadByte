@@ -5357,7 +5357,7 @@ class SettingsController {
     const githubBtn = document.getElementById('btn-view-github');
     if (githubBtn) {
       githubBtn.addEventListener('click', () => {
-        window.deadbyte?.shell?.openExternal('https://github.com/moneraldabai-ui/DeadByte');
+        window.deadbyte?.shell?.openExternal('https://github.com/moner-dev/DeadByte');
       });
     }
 
@@ -5365,7 +5365,7 @@ class SettingsController {
     const supportBtn = document.getElementById('btn-contact-support');
     if (supportBtn) {
       supportBtn.addEventListener('click', () => {
-        window.deadbyte?.shell?.openExternal('mailto:moner.aldabai@gmail.com?subject=DeadBYTE Support');
+        window.deadbyte?.shell?.openExternal('mailto:moner.intelligence@gmail.com?subject=DeadBYTE Support');
       });
     }
   }

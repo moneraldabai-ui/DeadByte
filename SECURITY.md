@@ -12,7 +12,7 @@
 **  How to Report**
 
   1. Do NOT open a public GitHub issue for security vulnerabilities
-  2. Send a detailed report to: moner.aldabai@gmail.com
+  2. Send a detailed report to: moner.intelligence@gmail.com
   3. Include the following information:
     - Description of the vulnerability
     - Steps to reproduce the issue

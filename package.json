@@ -13,17 +13,17 @@
     "build:all": "electron-builder --win portable nsis"
   },
   "author": {
-    "name": "M. O. N. E. R",
-    "email": "moner.aldabai@gmail.com"
+    "name": "MONER INTELLIGENCE SYSTEMS",
+    "email": "moner.intelligence@gmail.com"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/moneraldabai-ui/DeadByte"
+    "url": "https://github.com/moner-dev/DeadByte"
   },
-  "homepage": "https://github.com/moneraldabai-ui/DeadByte",
+  "homepage": "https://github.com/moner-dev/DeadByte",
   "bugs": {
-    "url": "https://github.com/moneraldabai-ui/DeadByte/issues"
+    "url": "https://github.com/moner-dev/DeadByte/issues"
   },
   "keywords": [
     "file-manager",
@@ -40,7 +40,7 @@
   "build": {
     "appId": "com.moner.deadbyte",
     "productName": "DeadBYTE",
-    "copyright": "Copyright 2026 M. O. N. E. R",
+    "copyright": "Copyright 2026 MONER INTELLIGENCE SYSTEMS",
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "directories": {
       "output": "dist",

@@ -498,7 +498,7 @@ ipcMain.handle('updates:check', async () => {
   const https = require('https');
   const currentVersion = require('./package.json').version;
 
-  const GITHUB_API_URL = 'https://api.github.com/repos/moneraldabai-ui/DeadByte/releases/latest';
+  const GITHUB_API_URL = 'https://api.github.com/repos/moner-dev/DeadByte/releases/latest';
   const TIMEOUT_MS = 10000;
 
   return new Promise((resolve) => {
@@ -758,7 +758,7 @@ async function checkForUpdatesOnStartup() {
 
     const https = require('https');
     const currentVersion = require('./package.json').version;
-    const GITHUB_API_URL = 'https://api.github.com/repos/moneraldabai-ui/DeadByte/releases/latest';
+    const GITHUB_API_URL = 'https://api.github.com/repos/moner-dev/DeadByte/releases/latest';
 
     const request = https.get(GITHUB_API_URL, {
       headers: {

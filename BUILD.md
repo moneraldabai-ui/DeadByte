@@ -169,5 +169,5 @@ Or use environment variables:
 
 ## Support
 
-- Issues: https://github.com/moneraldabai-ui/DeadByte/issues
-- Releases: https://github.com/moneraldabai-ui/DeadByte/releases
+- Issues: https://github.com/moner-dev/DeadByte/issues
+- Releases: https://github.com/moner-dev/DeadByte/releases

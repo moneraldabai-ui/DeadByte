@@ -9,17 +9,17 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/moneraldabai-ui/DeadByte/releases/latest">
-    <img src="https://img.shields.io/github/v/release/moneraldabai-ui/DeadByte?style=for-the-badge&color=00d4aa" alt="Latest Release">
+  <a href="https://github.com/moner-dev/DeadByte/releases/latest">
+    <img src="https://img.shields.io/github/v/release/moner-dev/DeadByte?style=for-the-badge&color=00d4aa" alt="Latest Release">
   </a>
-  <a href="https://github.com/moneraldabai-ui/DeadByte/releases">
-    <img src="https://img.shields.io/github/downloads/moneraldabai-ui/DeadByte/total?style=for-the-badge&color=00d4aa" alt="Downloads">
+  <a href="https://github.com/moner-dev/DeadByte/releases">
+    <img src="https://img.shields.io/github/downloads/moner-dev/DeadByte/total?style=for-the-badge&color=00d4aa" alt="Downloads">
   </a>
   <a href="LICENSE">
-    <img src="https://img.shields.io/github/license/moneraldabai-ui/DeadByte?style=for-the-badge&color=00d4aa" alt="License">
+    <img src="https://img.shields.io/github/license/moner-dev/DeadByte?style=for-the-badge&color=00d4aa" alt="License">
   </a>
-  <a href="https://github.com/moneraldabai-ui/DeadByte/stargazers">
-    <img src="https://img.shields.io/github/stars/moneraldabai-ui/DeadByte?style=for-the-badge&color=00d4aa" alt="Stars">
+  <a href="https://github.com/moner-dev/DeadByte/stargazers">
+    <img src="https://img.shields.io/github/stars/moner-dev/DeadByte?style=for-the-badge&color=00d4aa" alt="Stars">
   </a>
 </p>
 
@@ -116,8 +116,8 @@ Tired of files you can't delete? Processes that won't stop? System clutter slowi
 
 | Type | Download | Description |
 |------|----------|-------------|
-| **Installer** | [DeadBYTE-1.0.2-win-x64.exe](https://github.com/moneraldabai-ui/DeadByte/releases/download/v1.0.2/DeadBYTE-1.0.2-win-x64.exe) | Recommended - Full installation |
-| **Portable** | [DeadBYTE-1.0.2-Portable.exe](https://github.com/moneraldabai-ui/DeadByte/releases/download/v1.0.2/DeadBYTE-1.0.2-Portable.exe) | No installation required |
+| **Installer** | [DeadBYTE-1.0.2-win-x64.exe](https://github.com/moner-dev/DeadByte/releases/download/v1.0.2/DeadBYTE-1.0.2-win-x64.exe) | Recommended - Full installation |
+| **Portable** | [DeadBYTE-1.0.2-Portable.exe](https://github.com/moner-dev/DeadByte/releases/download/v1.0.2/DeadBYTE-1.0.2-Portable.exe) | No installation required |
 
 > **Requirements:** Windows 10/11 (64-bit) • Administrator privileges
 
@@ -126,7 +126,7 @@ Tired of files you can't delete? Processes that won't stop? System clutter slowi
 ## 🚀 Installation
 
 ### Option 1: Download Release (Recommended)
-1. Download the [latest installer](https://github.com/moneraldabai-ui/DeadByte/releases/latest)
+1. Download the [latest installer](https://github.com/moner-dev/DeadByte/releases/latest)
 2. Run `DeadBYTE-1.0.2-win-x64.exe`
 3. Follow installation wizard
 4. Launch DeadBYTE from desktop/Start menu
@@ -134,7 +134,7 @@ Tired of files you can't delete? Processes that won't stop? System clutter slowi
 ### Option 2: Build from Source
 ```bash
 # Clone repository
-git clone https://github.com/moneraldabai-ui/DeadByte.git
+git clone https://github.com/moner-dev/DeadByte.git
 cd DeadByte
 
 # Install dependencies
@@ -209,10 +209,10 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 👤 Author
 
-**M. O. N. E. R**
+**MONER INTELLIGENCE SYSTEMS**
 
-- GitHub: [@moneraldabai-ui](https://github.com/moneraldabai-ui)
-- Email: moner.aldabai@gmail.com
+- GitHub: [@moner-dev](https://github.com/moner-dev)
+- Email: moner.intelligence@gmail.com
 
 ---
 
@@ -231,6 +231,6 @@ If you find DeadBYTE useful, please consider:
 </p>
 
 <p align="center">
-  <a href="https://github.com/moneraldabai-ui/DeadByte/issues">Report Bug</a> •
-  <a href="https://github.com/moneraldabai-ui/DeadByte/issues">Request Feature</a>
+  <a href="https://github.com/moner-dev/DeadByte/issues">Report Bug</a> •
+  <a href="https://github.com/moner-dev/DeadByte/issues">Request Feature</a>
 </p>

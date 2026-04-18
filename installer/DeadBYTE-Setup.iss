@@ -2,15 +2,15 @@
 ; DeadBYTE - Inno Setup Installer Script
 ; ============================================
 ; Professional Windows Installer for DeadBYTE
-; Created by M. O. N. E. R
+; Created by MONER INTELLIGENCE SYSTEMS
 ; ============================================
 
 #define MyAppName "DeadBYTE"
 #define MyAppVersion "1.0.2"
-#define MyAppPublisher "M. O. N. E. R"
-#define MyAppURL "https://github.com/moneraldabai-ui/DeadByte"
+#define MyAppPublisher "MONER INTELLIGENCE SYSTEMS"
+#define MyAppURL "https://github.com/moner-dev/DeadByte"
 #define MyAppExeName "DeadBYTE.exe"
-#define MyAppCopyright "Copyright 2026 M. O. N. E. R"
+#define MyAppCopyright "Copyright 2026 MONER INTELLIGENCE SYSTEMS"
 
 ; Source directory - adjust this to where electron-builder outputs the unpacked app
 #define SourceDir "..\dist\win-unpacked"
