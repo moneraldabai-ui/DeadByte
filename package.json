@@ -101,6 +101,11 @@
     },
     "portable": {
       "artifactName": "${productName}-${version}-Portable.${ext}"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "moner-dev",
+      "repo": "DeadByte"
     }
   }
 }
