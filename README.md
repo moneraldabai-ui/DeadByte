@@ -116,8 +116,7 @@ Tired of files you can't delete? Processes that won't stop? System clutter slowi
 
 | Type | Download | Description |
 |------|----------|-------------|
-| **Installer** | [DeadBYTE-1.0.2-win-x64.exe](https://github.com/moner-dev/DeadByte/releases/download/v1.0.2/DeadBYTE-1.0.2-win-x64.exe) | Recommended - Full installation |
-| **Portable** | [DeadBYTE-1.0.2-Portable.exe](https://github.com/moner-dev/DeadByte/releases/download/v1.0.2/DeadBYTE-1.0.2-Portable.exe) | No installation required |
+| **Installer** | [DeadBYTE-Setup-v1.0.2.exe](https://github.com/moner-dev/DeadByte/releases/download/v1.0.2/DeadBYTE-Setup-v1.0.2.exe) | Recommended - Full installation |
 
 > **Requirements:** Windows 10/11 (64-bit) • Administrator privileges
 
@@ -127,7 +126,7 @@ Tired of files you can't delete? Processes that won't stop? System clutter slowi
 
 ### Option 1: Download Release (Recommended)
 1. Download the [latest installer](https://github.com/moner-dev/DeadByte/releases/latest)
-2. Run `DeadBYTE-1.0.2-win-x64.exe`
+2. Run `DeadBYTE-Setup-v1.0.2.exe`
 3. Follow installation wizard
 4. Launch DeadBYTE from desktop/Start menu
 
